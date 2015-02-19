@@ -17,6 +17,8 @@ end
 function lutro.load()
 	bg1 = lutro.graphics.newImage(lutro.path .. "assets/forestbackground.png")
 	bg2 = lutro.graphics.newImage(lutro.path .. "assets/foresttrees.png")
+	font = lutro.graphics.newFont(lutro.path .. "assets/font.png",
+		" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!?-+/")
 	map = tiled_load(lutro.path .. "assets/pagode.json")
 	tiled_load_objects(map, add_entity_from_map)
 	table.insert(entities, newNinja())
@@ -48,4 +50,6 @@ function lutro.draw()
 		end
 	end
 	tiled_draw_layer(map.layers[2])
+
+	--lutro.graphics.print(font, "Hello world!", 3, 1)
 end
