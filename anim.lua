@@ -10,7 +10,7 @@ function newAnimation(image, width, height, period, speed)
 	a.playing = true
 	a.speed = speed
 	a.period = period
-	a.steps = a.image.width / a.width
+	a.steps = a.image:getWidth() / a.width
 	return setmetatable(a, animation)
 end
 
@@ -28,8 +28,8 @@ function animation:draw(x, y)
 	lutro.graphics.drawq(
 		x, y,
 		self.width, self.height,
-		self.image.width, self.image.height,
-		self.image.data,
+		self.image:getWidth(), self.image:getHeight(),
+		self.image:getData(),
 		self.timer / self.period + 1
 	)
 end

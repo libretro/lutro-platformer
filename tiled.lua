@@ -37,7 +37,7 @@ function tiled_draw_layer(layer)
 		if (id > 0) then
 			lutro.graphics.drawq(x, y,
 				map.tilewidth, map.tileheight,
-				t.surface.width, t.surface.height, t.surface.data,
+				t.surface:getWidth(), t.surface:getHeight(), t.surface:getData(),
 				id - t.firstgid+1)
 		end
 	end
