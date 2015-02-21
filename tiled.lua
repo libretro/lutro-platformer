@@ -35,9 +35,8 @@ function tiled_draw_layer(layer)
 		local t = tiled_get_tileset(map, id)
 
 		if (id > 0) then
-			lutro.graphics.drawq(x, y,
+			lutro.graphics.drawq(t.surface, x, y,
 				map.tilewidth, map.tileheight,
-				t.surface:getWidth(), t.surface:getHeight(), t.surface:getData(),
 				id - t.firstgid+1)
 		end
 	end

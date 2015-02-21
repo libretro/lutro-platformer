@@ -26,10 +26,9 @@ end
 
 function animation:draw(x, y)
 	lutro.graphics.drawq(
+		self.image,
 		x, y,
 		self.width, self.height,
-		self.image:getWidth(), self.image:getHeight(),
-		self.image:getData(),
 		self.timer / self.period + 1
 	)
 end

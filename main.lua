@@ -37,12 +37,8 @@ function lutro.draw()
 	lutro.graphics.clear(0xff000000)
 
 	for i=0, 1 do
-		lutro.graphics.draw(bg1:getData(),
-				i*bg1:getWidth() + lutro.camera_x/6, 0,
-				bg1:getWidth(), bg1:getHeight())
-		lutro.graphics.draw(bg2:getData(),
-				i*bg2:getWidth() + lutro.camera_x/3, 0,
-				bg2:getWidth(), bg2:getHeight())
+		lutro.graphics.draw(bg1, i*bg1:getWidth() + lutro.camera_x/6, 0)
+		lutro.graphics.draw(bg2, i*bg2:getWidth() + lutro.camera_x/3, 0)
 	end
 
 	tiled_draw_layer(map.layers[1])
