@@ -45,6 +45,10 @@ function newNinja()
 	}
 
 	n.anim = n.animations[n.stance][n.direction]
+	n.sfx = {
+		jump = lutro.audio.newSource(lutro.path .. "assets/jump.wav"),
+		step = lutro.audio.newSource(lutro.path .. "assets/step.wav")
+	}
 	return setmetatable(n, ninja)
 end
 
@@ -69,6 +73,7 @@ function ninja:update(dt)
 		if not self.tmp_jump and self:on_the_ground() then
 			self.y = self.y - 1
 			self.yspeed = -300
+			lutro.audio.play(self.sfx.jump)
 			self.tmp_jump = true
 		else
 			self.tmp_jump = false
@@ -155,6 +160,7 @@ function ninja:on_collide(e1, e2, dx, dy)
 	if math.abs(dy) < math.abs(dx) and dy ~= 0 then
 		self.yspeed = 0
 		self.y = self.y + dy
+		lutro.audio.play(self.sfx.step)
 	end
 
 	if math.abs(dx) < math.abs(dy) and dx ~= 0 then
