@@ -25,7 +25,7 @@ function animation:update(dt)
 end
 
 function animation:draw(x, y)
-	lutro.graphics.drawq(
+	lutro.graphics.drawt(
 		self.image,
 		x, y,
 		self.width, self.height,

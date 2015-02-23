@@ -19,35 +19,35 @@ function newNinja()
 
 	n.animations = {
 		stand = {
-			left  = newAnimation(lutro.graphics.newImage(lutro.path ..
+			left  = newAnimation(lutro.graphics.newImage(
 				"assets/ninja_stand_left.png"),  48, 48, 100, 10),
-			right = newAnimation(lutro.graphics.newImage(lutro.path ..
+			right = newAnimation(lutro.graphics.newImage(
 				"assets/ninja_stand_right.png"), 48, 48, 100, 10)
 		},
 		run = {
-			left  = newAnimation(lutro.graphics.newImage(lutro.path ..
+			left  = newAnimation(lutro.graphics.newImage(
 				"assets/ninja_run_left.png"),  48, 48, 1, 10),
-			right = newAnimation(lutro.graphics.newImage(lutro.path ..
+			right = newAnimation(lutro.graphics.newImage(
 				"assets/ninja_run_right.png"), 48, 48, 1, 10)
 		},
 		jump = {
-			left  = newAnimation(lutro.graphics.newImage(lutro.path ..
+			left  = newAnimation(lutro.graphics.newImage(
 				"assets/ninja_jump_left.png"),  48, 48, 1, 10),
-			right = newAnimation(lutro.graphics.newImage(lutro.path ..
+			right = newAnimation(lutro.graphics.newImage(
 				"assets/ninja_jump_right.png"), 48, 48, 1, 10)
 		},
 		fall = {
-			left  = newAnimation(lutro.graphics.newImage(lutro.path ..
+			left  = newAnimation(lutro.graphics.newImage(
 				"assets/ninja_fall_left.png"),  48, 48, 1, 10),
-			right = newAnimation(lutro.graphics.newImage(lutro.path ..
+			right = newAnimation(lutro.graphics.newImage(
 				"assets/ninja_fall_right.png"), 48, 48, 1, 10)
 		},
 	}
 
 	n.anim = n.animations[n.stance][n.direction]
 	n.sfx = {
-		jump = lutro.audio.newSource(lutro.path .. "assets/jump.wav"),
-		step = lutro.audio.newSource(lutro.path .. "assets/step.wav")
+		jump = lutro.audio.newSource("assets/jump.wav"),
+		step = lutro.audio.newSource("assets/step.wav")
 	}
 	return setmetatable(n, ninja)
 end

@@ -1,15 +1,12 @@
 local json = require("dkjson")
 
 function tiled_load(filename)
-	local f = assert(io.open(filename, "r"))
-    local str = f:read("*all")
-    f:close()
-    local map, pos, err = json.decode(str, 1, nil)
+	local str = lutro.filesystem.read(filename)
+	local map, pos, err = json.decode(str, 1, nil)
 
 	for i = 1, #map.tilesets do
 		local tileset = map.tilesets[i]
-		local path = lutro.path .. "assets/" .. tileset.image
-		tileset.surface = lutro.graphics.newImage(path)
+		tileset.surface = lutro.graphics.newImage("assets/" .. tileset.image)
 	end
 
     return map
@@ -35,7 +32,7 @@ function tiled_draw_layer(layer)
 		local t = tiled_get_tileset(map, id)
 
 		if (id > 0) then
-			lutro.graphics.drawq(t.surface, x, y,
+			lutro.graphics.drawt(t.surface, x, y,
 				map.tilewidth, map.tileheight,
 				id - t.firstgid+1)
 		end
