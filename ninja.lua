@@ -58,9 +58,9 @@ function ninja:on_the_ground()
 end
 
 function ninja:update(dt)
-	local JOY_LEFT = lutro.input.joypad(lutro.input.JOY_LEFT)
-	local JOY_RIGHT = lutro.input.joypad(lutro.input.JOY_RIGHT)
-	local JOY_A = lutro.input.joypad(lutro.input.JOY_A)
+	local JOY_LEFT = lutro.input.joypad("left")
+	local JOY_RIGHT = lutro.input.joypad("right")
+	local JOY_A = lutro.input.joypad("a")
 
 	-- gravity
 	if not self:on_the_ground() then
