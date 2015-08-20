@@ -15,7 +15,7 @@ function newNinja()
 	n.y = (SCREEN_HEIGHT - n.height) / 2
 	n.direction = "left"
 	n.stance = "fall"
-	n.tmp_jump = false
+	n.DO_JUMP = 0
 
 	n.animations = {
 		stand = {
@@ -53,14 +53,14 @@ function newNinja()
 end
 
 function ninja:on_the_ground()
-	return solid_at(self.x +  1, self.y + 32, self)
+	return solid_at(self.x + 1, self.y + 32, self)
 		or solid_at(self.x + 15, self.y + 32, self)
 end
 
 function ninja:update(dt)
-	local JOY_LEFT = lutro.input.joypad("left")
+	local JOY_LEFT  = lutro.input.joypad("left")
 	local JOY_RIGHT = lutro.input.joypad("right")
-	local JOY_A = lutro.input.joypad("a")
+	local JOY_A     = lutro.input.joypad("a")
 
 	-- gravity
 	if not self:on_the_ground() then
@@ -69,19 +69,20 @@ function ninja:update(dt)
 	end
 
 	-- jumping
-	if JOY_A == 1 then
-		if not self.tmp_jump and self:on_the_ground() then
-			self.y = self.y - 1
-			self.yspeed = -300
-			lutro.audio.play(self.sfx.jump)
-			self.tmp_jump = true
-		else
-			self.tmp_jump = false
-		end
+	if JOY_A then
+		self.DO_JUMP = self.DO_JUMP + 1
+	else
+		self.DO_JUMP = 0
+	end
+
+	if self.DO_JUMP == 1 and self:on_the_ground() then
+		self.y = self.y - 1
+		self.yspeed = -300
+		lutro.audio.play(self.sfx.jump)
 	end
 
 	-- moving
-	if JOY_LEFT == 1 then
+	if JOY_LEFT then
 		self.xspeed = self.xspeed - self.xaccel * dt;
 		if self.xspeed < -200 then
 			self.xspeed = -200
@@ -89,7 +90,7 @@ function ninja:update(dt)
 		self.direction = "left";
 	end
 
-	if JOY_RIGHT == 1 then
+	if JOY_RIGHT then
 		self.xspeed = self.xspeed + self.xaccel * dt;
 		if self.xspeed > 200 then
 			self.xspeed = 200
