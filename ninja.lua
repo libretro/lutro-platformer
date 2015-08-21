@@ -144,12 +144,12 @@ function ninja:update(dt)
 	self.anim:update(dt)
 
 	-- camera
-	lutro.camera_x = - self.x + SCREEN_WIDTH/2 - self.width/2;
-	if lutro.camera_x > 0 then
-		lutro.camera_x = 0
+	camera_x = - self.x + SCREEN_WIDTH/2 - self.width/2;
+	if camera_x > 0 then
+		camera_x = 0
 	end
-	if lutro.camera_x < -(map.width * map.tilewidth) + SCREEN_WIDTH then
-		lutro.camera_x = -(map.width * map.tilewidth) + SCREEN_WIDTH
+	if camera_x < -(map.width * map.tilewidth) + SCREEN_WIDTH then
+		camera_x = -(map.width * map.tilewidth) + SCREEN_WIDTH
 	end
 end
 

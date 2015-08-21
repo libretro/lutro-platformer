@@ -15,6 +15,8 @@ local add_entity_from_map = function(object)
 end
 
 function lutro.load()
+	camera_x = 0
+	camera_y = 0
 	lutro.graphics.setBackgroundColor(0, 0, 0)
 	bg1 = lutro.graphics.newImage("assets/forestbackground.png")
 	bg2 = lutro.graphics.newImage("assets/foresttrees.png")
@@ -38,10 +40,12 @@ end
 function lutro.draw()
 	lutro.graphics.clear()
 
-	for i=0, 1 do
-		lutro.graphics.draw(bg1, i*bg1:getWidth() + lutro.camera_x/6, 0)
-		lutro.graphics.draw(bg2, i*bg2:getWidth() + lutro.camera_x/3, 0)
+	for i=0, 4 do
+		lutro.graphics.draw(bg1, i*bg1:getWidth() + camera_x / 6, 0)
+		lutro.graphics.draw(bg2, i*bg2:getWidth() + camera_x / 3, 0)
 	end
+
+	lutro.graphics.translate(camera_x, camera_y)
 
 	tiled_draw_layer(map.layers[1])
 	for i=1, #entities do
@@ -50,6 +54,8 @@ function lutro.draw()
 		end
 	end
 	tiled_draw_layer(map.layers[2])
+
+	lutro.graphics.translate(0, 0)
 
 	lutro.graphics.print("Hello world!", 3, 1)
 end
