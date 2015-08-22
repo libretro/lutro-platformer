@@ -25,10 +25,21 @@ function animation:update(dt)
 end
 
 function animation:draw(x, y)
-	lutro.graphics.drawt(
+	local id = math.floor(self.timer / self.period + 1)
+	local tw = self.width
+	local th = self.height
+	local sw = self.image:getWidth()
+	local sh = self.image:getHeight()
+
+	local q = lutro.graphics.newQuad(
+		((id-1)%(sw/tw))*tw,
+		math.floor((id-1)/(sw/tw))*tw,
+		tw, th,
+		sw, sh)
+
+	lutro.graphics.draw(
 		self.image,
-		x, y,
-		self.width, self.height,
-		self.timer / self.period + 1
+		q,
+		x, y
 	)
 end

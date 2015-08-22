@@ -27,14 +27,23 @@ function tiled_draw_layer(layer)
 	local data = layer.data
 	for j = 1, #data do
 		local id = data[j]
-		local y = math.floor((j-1) / layer.width) * map.tileheight
-		local x = ((j-1) % layer.width) * map.tilewidth
-		local t = tiled_get_tileset(map, id)
-
 		if (id > 0) then
-			lutro.graphics.drawt(t.surface, x, y,
-				map.tilewidth, map.tileheight,
-				id - t.firstgid+1)
+			local y = math.floor((j-1) / layer.width) * map.tileheight
+			local x = ((j-1) % layer.width) * map.tilewidth
+			local t = tiled_get_tileset(map, id)
+			local tw = map.tilewidth
+			local th = map.tileheight
+			local sw = t.surface:getWidth()
+			local sh = t.surface:getHeight()
+			local tid = id - t.firstgid+1
+
+			local q = lutro.graphics.newQuad(
+				((tid-1)%(sw/tw))*tw,
+				math.floor((tid-1)/(sw/tw))*tw,
+				tw, th,
+				sw, sh)
+
+			lutro.graphics.draw(t.surface, q, x, y)
 		end
 	end
 end
