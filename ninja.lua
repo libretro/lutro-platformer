@@ -102,8 +102,8 @@ function ninja:update(dt)
 	self.x = self.x + self.xspeed * dt;
 
 	-- decelerating
-	if  not (JOY_RIGHT == 1 and self.xspeed > 0)
-	and not (JOY_LEFT == 1 and self.xspeed < 0)
+	if  not (JOY_RIGHT and self.xspeed > 0)
+	and not (JOY_LEFT  and self.xspeed < 0)
 	and self:on_the_ground()
 	then
 		if self.xspeed > 0 then
