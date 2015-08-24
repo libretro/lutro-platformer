@@ -45,6 +45,8 @@ function lutro.draw()
 		lutro.graphics.draw(bg2, i*bg2:getWidth() + camera_x / 3, 0)
 	end
 
+	lutro.graphics.push()
+
 	lutro.graphics.translate(camera_x, camera_y)
 
 	tiled_draw_layer(map.layers[1])
@@ -55,7 +57,7 @@ function lutro.draw()
 	end
 	tiled_draw_layer(map.layers[2])
 
-	lutro.graphics.translate(0, 0)
+	lutro.graphics.pop()
 
 	lutro.graphics.print("Hello world!", 3, 1)
 end
