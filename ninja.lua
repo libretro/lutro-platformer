@@ -15,6 +15,7 @@ function newNinja()
 	n.y = (SCREEN_HEIGHT - n.height) / 2
 	n.direction = "left"
 	n.stance = "fall"
+	n.type = "ninja"
 	n.DO_JUMP = 0
 
 	n.animations = {

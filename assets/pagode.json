@@ -24,17 +24,12 @@
         }, 
         {
          "draworder":"topdown",
-         "height":15,
          "name":"objects",
          "objects":[
                 {
                  "height":32,
                  "id":1,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"ground",
                  "visible":true,
@@ -46,10 +41,6 @@
                  "height":16,
                  "id":2,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"ground",
                  "visible":true,
@@ -61,10 +52,6 @@
                  "height":240,
                  "id":3,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"ground",
                  "visible":true,
@@ -76,10 +63,6 @@
                  "height":240,
                  "id":4,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"ground",
                  "visible":true,
@@ -91,10 +74,6 @@
                  "height":16,
                  "id":5,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"ground",
                  "visible":true,
@@ -106,10 +85,6 @@
                  "height":32,
                  "id":6,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"ground",
                  "visible":true,
@@ -121,79 +96,165 @@
                  "height":16,
                  "id":7,
                  "name":"",
-                 "properties":
-                    {
-
-                    },
                  "rotation":0,
                  "type":"ground",
                  "visible":true,
                  "width":32,
                  "x":960,
                  "y":160
+                }, 
+                {
+                 "height":16,
+                 "id":10,
+                 "name":"",
+                 "rotation":0,
+                 "type":"coin",
+                 "visible":true,
+                 "width":16,
+                 "x":784,
+                 "y":112
+                }, 
+                {
+                 "height":16,
+                 "id":11,
+                 "name":"",
+                 "rotation":0,
+                 "type":"coin",
+                 "visible":true,
+                 "width":16,
+                 "x":800,
+                 "y":112
+                }, 
+                {
+                 "height":16,
+                 "id":13,
+                 "name":"",
+                 "rotation":0,
+                 "type":"coin",
+                 "visible":true,
+                 "width":16,
+                 "x":816,
+                 "y":112
+                }, 
+                {
+                 "height":16,
+                 "id":14,
+                 "name":"",
+                 "rotation":0,
+                 "type":"coin",
+                 "visible":true,
+                 "width":16,
+                 "x":832,
+                 "y":112
+                }, 
+                {
+                 "height":16,
+                 "id":15,
+                 "name":"",
+                 "rotation":0,
+                 "type":"coin",
+                 "visible":true,
+                 "width":16,
+                 "x":848,
+                 "y":112
+                }, 
+                {
+                 "height":16,
+                 "id":16,
+                 "name":"",
+                 "rotation":0,
+                 "type":"coin",
+                 "visible":true,
+                 "width":16,
+                 "x":864,
+                 "y":112
+                }, 
+                {
+                 "height":16,
+                 "id":17,
+                 "name":"",
+                 "rotation":0,
+                 "type":"coin",
+                 "visible":true,
+                 "width":16,
+                 "x":880,
+                 "y":112
+                }, 
+                {
+                 "height":16,
+                 "id":18,
+                 "name":"",
+                 "rotation":0,
+                 "type":"coin",
+                 "visible":true,
+                 "width":16,
+                 "x":896,
+                 "y":112
+                }, 
+                {
+                 "height":16,
+                 "id":19,
+                 "name":"",
+                 "rotation":0,
+                 "type":"coin",
+                 "visible":true,
+                 "width":16,
+                 "x":912,
+                 "y":112
                 }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
-         "width":80,
          "x":0,
          "y":0
         }],
- "nextobjectid":9,
+ "nextobjectid":20,
  "orientation":"orthogonal",
- "properties":
-    {
-
-    },
  "renderorder":"right-down",
+ "tiledversion":"1.0.1",
  "tileheight":16,
  "tilesets":[
         {
+         "columns":23,
          "firstgid":1,
          "image":"forestground.png",
          "imageheight":160,
          "imagewidth":368,
          "margin":0,
          "name":"forestground",
-         "properties":
-            {
-
-            },
          "spacing":0,
+         "tilecount":230,
          "tileheight":16,
          "tilewidth":16
         }, 
         {
+         "columns":3,
          "firstgid":231,
          "image":"blueflame.png",
          "imageheight":32,
          "imagewidth":48,
          "margin":0,
          "name":"blueflame",
-         "properties":
-            {
-
-            },
          "spacing":0,
+         "tilecount":6,
          "tileheight":16,
          "tilewidth":16
         }, 
         {
+         "columns":13,
          "firstgid":237,
          "image":"forestpagode.png",
          "imageheight":208,
          "imagewidth":208,
          "margin":0,
          "name":"forestpagode",
-         "properties":
-            {
-
-            },
          "spacing":0,
+         "tilecount":169,
          "tileheight":16,
          "tilewidth":16
         }],
  "tilewidth":16,
+ "type":"map",
  "version":1,
  "width":80
 }

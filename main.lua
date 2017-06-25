@@ -3,6 +3,7 @@ require "tiled"
 require "anim"
 require "ninja"
 require "obake"
+require "coin"
 
 function lutro.conf(t)
 	t.width  = SCREEN_WIDTH
@@ -12,6 +13,8 @@ end
 local add_entity_from_map = function(object)
 	if object.type == "ground" then
 		table.insert(entities, object)
+	elseif object.type == "coin" then
+		table.insert(entities, newCoin(object))
 	end
 end
 
@@ -26,6 +29,7 @@ function lutro.load()
 	lutro.graphics.setFont(font)
 	map = tiled_load("assets/pagode.json")
 	tiled_load_objects(map, add_entity_from_map)
+	sfx_coin = lutro.audio.newSource("assets/coin.wav")
 	ninja = newNinja()
 	table.insert(entities, ninja)
 	table.insert(entities, newObake())

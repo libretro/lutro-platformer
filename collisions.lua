@@ -7,6 +7,10 @@ function detect_collisions()
  				local e1 = entities[i]
  				local e2 = entities[j]
 
+				if not e1 or not e2 then
+					return
+				end
+
 				if  e1.x < e2.x + e2.width
 				and e1.x + e1.width > e2.x
 				and e1.y < e2.y + e2.height
