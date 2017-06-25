@@ -62,8 +62,9 @@ function newNinja(object)
 end
 
 function ninja:on_the_ground()
-	return solid_at(self.x + 1, self.y + 32, self)
-		or solid_at(self.x + 15, self.y + 32, self)
+	return (solid_at(self.x + 1, self.y + 32, self)
+		or solid_at(self.x + 15, self.y + 32, self))
+		and self.yspeed >= 0
 end
 
 function ninja:update(dt)
@@ -91,7 +92,7 @@ function ninja:update(dt)
 
 	if self.DO_JUMP == 1 and self:on_the_ground() then
 		self.y = self.y - 1
-		self.yspeed = -300
+		self.yspeed = -330
 		lutro.audio.play(sfx_jump)
 	end
 
@@ -185,6 +186,14 @@ function ninja:on_collide(e1, e2, dx, dy)
 		if math.abs(dx) < math.abs(dy) and dx ~= 0 then
 			self.xspeed = 0
 			self.x = self.x + dx
+		end
+
+	elseif e2.type == "bridge" then
+
+		if math.abs(dy) < math.abs(dx) and dy ~= 0 and self.yspeed > 0.0 then
+			self.yspeed = 0
+			self.y = self.y + dy
+			lutro.audio.play(sfx_step)
 		end
 
 	elseif (e2.type == "obake" or e2.type == "porc") and self.hit == 0 then
