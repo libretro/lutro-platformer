@@ -24,6 +24,7 @@ end
 function lutro.load()
 	camera_x = 0
 	camera_y = 0
+	gold = 0
 	lutro.graphics.setBackgroundColor(0, 0, 0)
 	bg1 = lutro.graphics.newImage("assets/forestbackground.png")
 	bg2 = lutro.graphics.newImage("assets/foresttrees.png")
@@ -56,7 +57,7 @@ function lutro.draw()
 
 	for i=0, 4 do
 		lutro.graphics.draw(bg1, i*bg1:getWidth() + camera_x / 6, 0)
-		lutro.graphics.draw(bg2, i*bg2:getWidth() + camera_x / 3, 0)
+		--lutro.graphics.draw(bg2, i*bg2:getWidth() + camera_x / 3, 0)
 	end
 
 	lutro.graphics.push()
@@ -73,5 +74,5 @@ function lutro.draw()
 
 	lutro.graphics.pop()
 
-	lutro.graphics.print("Hello world!", 3, 1)
+	lutro.graphics.print("G" .. gold, 3, 1)
 end

@@ -27,5 +27,6 @@ function coin:on_collide(e1, e2, dx, dy)
 				table.remove(entities, i)
 			end
 		end
+		gold = gold + 1
 	end
 end
