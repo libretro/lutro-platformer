@@ -13,6 +13,7 @@ function newObake()
 	n.y = 180
 	n.direction = "left"
 	n.stance = "fly"
+	n.type = "obake"
 	n.t = 0
 
 	n.animations = {

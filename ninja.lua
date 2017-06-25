@@ -17,6 +17,7 @@ function newNinja()
 	n.stance = "fall"
 	n.type = "ninja"
 	n.DO_JUMP = 0
+	n.hit = 0
 
 	n.animations = {
 		stand = {
@@ -49,6 +50,12 @@ function newNinja()
 			right = newAnimation(lutro.graphics.newImage(
 				"assets/ninja_duck_right.png"), 48, 48, 1, 10)
 		},
+		hit = {
+			left  = newAnimation(lutro.graphics.newImage(
+				"assets/ninja_hit_left.png"),  48, 48, 1, 10),
+			right = newAnimation(lutro.graphics.newImage(
+				"assets/ninja_hit_right.png"), 48, 48, 1, 10)
+		},
 	}
 
 	n.anim = n.animations[n.stance][n.direction]
@@ -66,6 +73,10 @@ function ninja:update(dt)
 	local JOY_RIGHT = lutro.input.joypad("right")
 	local JOY_DOWN  = lutro.input.joypad("down")
 	local JOY_A     = lutro.input.joypad("a")
+
+	if self.hit > 0 then
+		self.hit = self.hit - 1
+	end
 
 	-- gravity
 	if not self:on_the_ground() then
@@ -146,6 +157,10 @@ function ninja:update(dt)
 		end
 	end
 
+	if self.hit > 0 then
+		self.stance = "hit"
+	end
+
 	local anim = self.animations[self.stance][self.direction]
 	-- always animate from first frame 
 	if anim ~= self.anim then
@@ -182,6 +197,20 @@ function ninja:on_collide(e1, e2, dx, dy)
 			self.xspeed = 0
 			self.x = self.x + dx
 		end
+
+	elseif (e2.type == "obake" or e2.type == "porc") and self.hit == 0 then
+
+		--lutro.audio.play(sfx_hit)
+		screen_shake = 0.25
+		self.hit = 60
+		if dx > 0 then
+			self.xspeed = 200
+		else
+			self.xspeed = -200
+		end
+		self.y = self.y - 1
+		self.yspeed = -1
+		--self.hp = self.hp - 1
 
 	end
 end
