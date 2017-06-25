@@ -169,15 +169,6 @@ function ninja:update(dt)
 	self.anim = anim;
 
 	self.anim:update(dt)
-
-	-- camera
-	camera_x = - self.x + SCREEN_WIDTH/2 - self.width/2;
-	if camera_x > 0 then
-		camera_x = 0
-	end
-	if camera_x < -(map.width * map.tilewidth) + SCREEN_WIDTH then
-		camera_x = -(map.width * map.tilewidth) + SCREEN_WIDTH
-	end
 end
 
 function ninja:draw()
