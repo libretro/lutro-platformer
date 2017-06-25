@@ -68,10 +68,6 @@ function ninja:on_the_ground()
 end
 
 function ninja:update(dt)
-	local JOY_LEFT  = lutro.input.joypad("left")
-	local JOY_RIGHT = lutro.input.joypad("right")
-	local JOY_DOWN  = lutro.input.joypad("down")
-	local JOY_A     = lutro.input.joypad("a")
 
 	if self.hit > 0 then
 		self.hit = self.hit - 1
@@ -90,7 +86,10 @@ function ninja:update(dt)
 		self.DO_JUMP = 0
 	end
 
-	if self.DO_JUMP == 1 and self:on_the_ground() then
+	if self.DO_JUMP == 1 and JOY_DOWN
+	and not solid_at(self.x + 8, self.y + 32 + 3) then
+		self.y = self.y + 3
+	elseif self.DO_JUMP == 1 and self:on_the_ground() then
 		self.y = self.y - 1
 		self.yspeed = -330
 		lutro.audio.play(sfx_jump)
@@ -195,7 +194,8 @@ function ninja:on_collide(e1, e2, dx, dy)
 
 	elseif e2.type == "bridge" then
 
-		if math.abs(dy) < math.abs(dx) and dy ~= 0 and self.yspeed > 0.0 then
+		if math.abs(dy) < math.abs(dx) and dy ~= 0 and self.yspeed > 0
+		and not JOY_DOWN then
 			self.yspeed = 0
 			self.y = self.y + dy
 			lutro.audio.play(sfx_step)

@@ -53,6 +53,12 @@ function lutro.load()
 end
 
 function lutro.update(dt)
+
+	JOY_LEFT  = lutro.input.joypad("left")
+	JOY_RIGHT = lutro.input.joypad("right")
+	JOY_DOWN  = lutro.input.joypad("down")
+	JOY_A     = lutro.input.joypad("a")
+
 	for i=1, #entities do
 		if entities[i].update then
 			entities[i]:update(dt)
