@@ -16,6 +16,7 @@ function newPorc(object)
 	n.hit = 0
 	n.die = 0
 	n.hp = 3
+	n.c = 0
 	n.GOLEFT = false
 
 	n.animations = {
@@ -50,6 +51,11 @@ function porc:on_the_ground()
 end
 
 function porc:update(dt)
+	self.c = self.c + 1
+	if self.c % 100 == 0 and math.abs(self.x - ninja.x) < 160 then
+		lutro.audio.play(sfx_porc)
+	end
+
 	if self.hit > 0 then
 		self.hit = self.hit - 1
 	end

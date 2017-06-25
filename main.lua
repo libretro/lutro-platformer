@@ -4,6 +4,7 @@ require "anim"
 require "ninja"
 require "obake"
 require "coin"
+require "bigcoin"
 require "porc"
 
 function lutro.conf(t)
@@ -16,6 +17,8 @@ local add_entity_from_map = function(object)
 		table.insert(entities, object)
 	elseif object.type == "coin" then
 		table.insert(entities, newCoin(object))
+	elseif object.type == "bigcoin" then
+		table.insert(entities, newBigcoin(object))
 	elseif object.type == "porc" then
 		table.insert(entities, newPorc(object))
 	elseif object.type == "obake" then
@@ -44,6 +47,7 @@ function lutro.load()
 	sfx_jump = lutro.audio.newSource("assets/jump.wav")
 	sfx_step = lutro.audio.newSource("assets/step.wav")
 	sfx_hit = lutro.audio.newSource("assets/hit.wav")
+	sfx_porc = lutro.audio.newSource("assets/porc.wav")
 end
 
 function lutro.update(dt)
