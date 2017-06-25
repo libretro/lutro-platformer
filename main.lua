@@ -29,7 +29,11 @@ function lutro.load()
 	lutro.graphics.setFont(font)
 	map = tiled_load("assets/pagode.json")
 	tiled_load_objects(map, add_entity_from_map)
+
 	sfx_coin = lutro.audio.newSource("assets/coin.wav")
+	sfx_jump = lutro.audio.newSource("assets/jump.wav")
+	sfx_step = lutro.audio.newSource("assets/step.wav")
+
 	ninja = newNinja()
 	table.insert(entities, ninja)
 	table.insert(entities, newObake())
