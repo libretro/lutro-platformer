@@ -200,7 +200,7 @@ function ninja:on_collide(e1, e2, dx, dy)
 
 	elseif (e2.type == "obake" or e2.type == "porc") and self.hit == 0 then
 
-		--lutro.audio.play(sfx_hit)
+		lutro.audio.play(sfx_hit)
 		screen_shake = 0.25
 		self.hit = 60
 		if dx > 0 then
@@ -210,7 +210,7 @@ function ninja:on_collide(e1, e2, dx, dy)
 		end
 		self.y = self.y - 1
 		self.yspeed = -1
-		--self.hp = self.hp - 1
+		hp = hp - 1
 
 	end
 end

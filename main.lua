@@ -25,6 +25,7 @@ function lutro.load()
 	camera_x = 0
 	camera_y = 0
 	gold = 0
+	hp = 3
 	lutro.graphics.setBackgroundColor(0, 0, 0)
 	bg1 = lutro.graphics.newImage("assets/forestbackground.png")
 	bg2 = lutro.graphics.newImage("assets/foresttrees.png")
@@ -37,6 +38,7 @@ function lutro.load()
 	sfx_coin = lutro.audio.newSource("assets/coin.wav")
 	sfx_jump = lutro.audio.newSource("assets/jump.wav")
 	sfx_step = lutro.audio.newSource("assets/step.wav")
+	sfx_hit = lutro.audio.newSource("assets/hit.wav")
 
 	ninja = newNinja()
 	table.insert(entities, ninja)
@@ -74,5 +76,5 @@ function lutro.draw()
 
 	lutro.graphics.pop()
 
-	lutro.graphics.print("G" .. gold, 3, 1)
+	lutro.graphics.print("HP " .. hp .. "  GOLD " .. gold, 3, 1)
 end
