@@ -3,14 +3,12 @@ require "collisions"
 local obake = {}
 obake.__index = obake
 
-function newObake()
-	local n = {}
+function newObake(object)
+	local n = object
 	n.width = 16
 	n.height = 16
 	n.xspeed = 0
 	n.yspeed = 0
-	n.x = (SCREEN_WIDTH - n.width)
-	n.y = 180
 	n.direction = "left"
 	n.stance = "fly"
 	n.type = "obake"

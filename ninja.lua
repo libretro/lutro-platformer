@@ -3,17 +3,15 @@ require "collisions"
 local ninja = {}
 ninja.__index = ninja
 
-function newNinja()
-	local n = {}
+function newNinja(object)
+	local n = object
 	n.width = 16
 	n.height = 32
 	n.xspeed = 0
 	n.yspeed = 0
 	n.xaccel = 200
 	n.yaccel = 1000
-	n.x = (SCREEN_WIDTH - n.width) / 2
-	n.y = (SCREEN_HEIGHT - n.height) / 2
-	n.direction = "left"
+	n.direction = "right"
 	n.stance = "fall"
 	n.type = "ninja"
 	n.DO_JUMP = 0

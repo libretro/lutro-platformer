@@ -18,6 +18,11 @@ local add_entity_from_map = function(object)
 		table.insert(entities, newCoin(object))
 	elseif object.type == "porc" then
 		table.insert(entities, newPorc(object))
+	elseif object.type == "obake" then
+		table.insert(entities, newObake(object))
+	elseif object.type == "ninja" then
+		ninja = newNinja(object)
+		table.insert(entities, ninja)
 	end
 end
 
@@ -39,10 +44,6 @@ function lutro.load()
 	sfx_jump = lutro.audio.newSource("assets/jump.wav")
 	sfx_step = lutro.audio.newSource("assets/step.wav")
 	sfx_hit = lutro.audio.newSource("assets/hit.wav")
-
-	ninja = newNinja()
-	table.insert(entities, ninja)
-	table.insert(entities, newObake())
 end
 
 function lutro.update(dt)
