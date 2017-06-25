@@ -42,6 +42,12 @@ function newNinja()
 			right = newAnimation(lutro.graphics.newImage(
 				"assets/ninja_fall_right.png"), 48, 48, 1, 10)
 		},
+		duck = {
+			left  = newAnimation(lutro.graphics.newImage(
+				"assets/ninja_duck_left.png"),  48, 48, 1, 10),
+			right = newAnimation(lutro.graphics.newImage(
+				"assets/ninja_duck_right.png"), 48, 48, 1, 10)
+		},
 	}
 
 	n.anim = n.animations[n.stance][n.direction]
@@ -60,6 +66,7 @@ end
 function ninja:update(dt)
 	local JOY_LEFT  = lutro.input.joypad("left")
 	local JOY_RIGHT = lutro.input.joypad("right")
+	local JOY_DOWN  = lutro.input.joypad("down")
 	local JOY_A     = lutro.input.joypad("a")
 
 	-- gravity
@@ -131,6 +138,13 @@ function ninja:update(dt)
 			self.stance = "fall"
 		else
 			self.stance = "jump"
+		end
+	end
+
+	if JOY_DOWN then
+		if self:on_the_ground() then
+			self.xspeed = 0
+			self.stance = "duck"
 		end
 	end
 
