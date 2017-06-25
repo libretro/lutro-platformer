@@ -172,14 +172,18 @@ function ninja:draw()
 end
 
 function ninja:on_collide(e1, e2, dx, dy)
-	if math.abs(dy) < math.abs(dx) and dy ~= 0 then
-		self.yspeed = 0
-		self.y = self.y + dy
-		lutro.audio.play(self.sfx.step)
-	end
+	if e2.type == "ground" then
 
-	if math.abs(dx) < math.abs(dy) and dx ~= 0 then
-		self.xspeed = 0
-		self.x = self.x + dx
+		if math.abs(dy) < math.abs(dx) and dy ~= 0 then
+			self.yspeed = 0
+			self.y = self.y + dy
+			lutro.audio.play(self.sfx.step)
+		end
+
+		if math.abs(dx) < math.abs(dy) and dx ~= 0 then
+			self.xspeed = 0
+			self.x = self.x + dx
+		end
+
 	end
 end

@@ -2,6 +2,7 @@ require "global"
 require "tiled"
 require "anim"
 require "ninja"
+require "obake"
 
 function lutro.conf(t)
 	t.width  = SCREEN_WIDTH
@@ -25,7 +26,9 @@ function lutro.load()
 	lutro.graphics.setFont(font)
 	map = tiled_load("assets/pagode.json")
 	tiled_load_objects(map, add_entity_from_map)
-	table.insert(entities, newNinja())
+	ninja = newNinja()
+	table.insert(entities, ninja)
+	table.insert(entities, newObake())
 end
 
 function lutro.update(dt)
