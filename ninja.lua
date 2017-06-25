@@ -96,6 +96,11 @@ function ninja:update(dt)
 		lutro.audio.play(sfx_jump)
 	end
 
+	-- variable jump height
+	-- if self.DO_JUMP > 1 and self. DO_JUMP <= 50 and self.yspeed < 0 then
+	-- 	self.yspeed = self.yspeed - 10
+	-- end
+
 	-- moving
 	if JOY_LEFT then
 		self.xspeed = self.xspeed - self.xaccel * dt;
