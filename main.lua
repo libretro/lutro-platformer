@@ -50,6 +50,8 @@ function lutro.load()
 	sfx_step = lutro.audio.newSource("assets/step.wav")
 	sfx_hit = lutro.audio.newSource("assets/hit.wav")
 	sfx_porc = lutro.audio.newSource("assets/porc.wav")
+	sfx_dead = lutro.audio.newSource("assets/dead.wav")
+	sfx_gameover = lutro.audio.newSource("assets/gameover.wav")
 end
 
 function lutro.update(dt)
@@ -59,10 +61,14 @@ function lutro.update(dt)
 	JOY_DOWN  = lutro.input.joypad("down")
 	JOY_A     = lutro.input.joypad("a")
 
-	for i=1, #entities do
-		if entities[i].update then
-			entities[i]:update(dt)
+	if hp > 0 then
+		for i=1, #entities do
+			if entities[i].update then
+				entities[i]:update(dt)
+			end
 		end
+	else
+		ninja:update(dt)
 	end
 
 	detect_collisions()

@@ -16,6 +16,7 @@ function newNinja(object)
 	n.type = "ninja"
 	n.DO_JUMP = 0
 	n.hit = 0
+	n.dying = 0
 
 	n.animations = {
 		stand = {
@@ -54,6 +55,12 @@ function newNinja(object)
 			right = newAnimation(lutro.graphics.newImage(
 				"assets/ninja_hit_right.png"), 48, 48, 1, 10)
 		},
+		dead = {
+			left  = newAnimation(lutro.graphics.newImage(
+				"assets/ninja_dead_left.png"),  48, 48, 100, 10),
+			right = newAnimation(lutro.graphics.newImage(
+				"assets/ninja_dead_right.png"), 48, 48, 100, 10)
+		},
 	}
 
 	n.anim = n.animations[n.stance][n.direction]
@@ -65,9 +72,28 @@ function ninja:on_the_ground()
 	return (solid_at(self.x + 1, self.y + 32, self)
 		or solid_at(self.x + 15, self.y + 32, self))
 		and self.yspeed >= 0
+		and hp > 0
 end
 
 function ninja:update(dt)
+
+	if hp <= 0 then
+		self.dying = self.dying + 1
+		self.anim = self.animations["dead"][self.direction]
+		self.anim:update(dt)
+		if self.dying == 1 then
+			lutro.audio.play(sfx_dead)
+		end
+		if self.dying == 100 then
+			lutro.audio.play(sfx_gameover)
+			self.yspeed = -300
+		end
+		if self.dying >= 100 then
+			self.yspeed = self.yspeed + self.yaccel * dt
+			self.y = self.y + dt * self.yspeed
+		end
+		return
+	end
 
 	if self.hit > 0 then
 		self.hit = self.hit - 1
@@ -179,6 +205,11 @@ function ninja:draw()
 end
 
 function ninja:on_collide(e1, e2, dx, dy)
+
+	if hp <= 0 then
+		return
+	end
+
 	if e2.type == "ground" then
 
 		if math.abs(dy) < math.abs(dx) and dy ~= 0 then
