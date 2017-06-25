@@ -19,7 +19,7 @@ function animation:update(dt)
 
 	self.timer = self.timer + dt * self.speed
 
-	if self.timer > self.steps * self.period then
+	if self.timer >= self.steps * self.period then
 		self.timer = 0
 	end
 end

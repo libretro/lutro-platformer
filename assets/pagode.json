@@ -201,6 +201,17 @@
                  "width":16,
                  "x":912,
                  "y":112
+                }, 
+                {
+                 "height":32,
+                 "id":20,
+                 "name":"",
+                 "rotation":0,
+                 "type":"porc",
+                 "visible":true,
+                 "width":32,
+                 "x":848,
+                 "y":176
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -208,7 +219,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":20,
+ "nextobjectid":21,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.0.1",

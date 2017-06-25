@@ -4,6 +4,7 @@ require "anim"
 require "ninja"
 require "obake"
 require "coin"
+require "porc"
 
 function lutro.conf(t)
 	t.width  = SCREEN_WIDTH
@@ -15,6 +16,8 @@ local add_entity_from_map = function(object)
 		table.insert(entities, object)
 	elseif object.type == "coin" then
 		table.insert(entities, newCoin(object))
+	elseif object.type == "porc" then
+		table.insert(entities, newPorc(object))
 	end
 end
 
