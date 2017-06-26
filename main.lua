@@ -17,6 +17,8 @@ local add_entity_from_map = function(object)
 		table.insert(entities, object)
 	elseif object.type == "bridge" then
 		table.insert(entities, object)
+	elseif object.type == "spikes" then
+		table.insert(entities, object)
 	elseif object.type == "coin" then
 		table.insert(entities, newCoin(object))
 	elseif object.type == "bigcoin" then

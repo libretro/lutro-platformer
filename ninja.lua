@@ -232,6 +232,10 @@ function ninja:on_collide(e1, e2, dx, dy)
 			lutro.audio.play(sfx_step)
 		end
 
+	elseif e2.type == "spikes" then
+
+		hp = 0
+
 	elseif (e2.type == "obake" or e2.type == "porc") and self.hit == 0 then
 
 		lutro.audio.play(sfx_hit)
