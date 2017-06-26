@@ -368,17 +368,6 @@
                  "y":144
                 }, 
                 {
-                 "height":48,
-                 "id":59,
-                 "name":"",
-                 "rotation":0,
-                 "type":"ground",
-                 "visible":true,
-                 "width":272,
-                 "x":2288,
-                 "y":192
-                }, 
-                {
                  "height":16,
                  "id":60,
                  "name":"",
@@ -698,7 +687,7 @@
                  "y":48
                 }, 
                 {
-                 "height":128,
+                 "height":176,
                  "id":98,
                  "name":"",
                  "rotation":0,
@@ -709,7 +698,7 @@
                  "y":64
                 }, 
                 {
-                 "height":128,
+                 "height":144,
                  "id":99,
                  "name":"",
                  "rotation":0,
