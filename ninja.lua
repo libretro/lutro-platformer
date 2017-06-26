@@ -213,9 +213,11 @@ function ninja:on_collide(e1, e2, dx, dy)
 	if e2.type == "ground" then
 
 		if math.abs(dy) < math.abs(dx) and dy ~= 0 then
+			if self.yspeed > 200 then
+				lutro.audio.play(sfx_step)
+			end
 			self.yspeed = 0
 			self.y = self.y + dy
-			lutro.audio.play(sfx_step)
 		end
 
 		if math.abs(dx) < math.abs(dy) and dx ~= 0 then
@@ -223,10 +225,12 @@ function ninja:on_collide(e1, e2, dx, dy)
 			self.x = self.x + dx
 		end
 
-	elseif e2.type == "bridge" then
+	elseif e2.type == "bridge" or e2.type == "elevator" then
 
 		if math.abs(dy) < math.abs(dx) and dy ~= 0 and self.yspeed > 0
-		and not JOY_DOWN then
+		and not JOY_DOWN
+		and self.y + self.height > e2.y
+		then
 			self.yspeed = 0
 			self.y = self.y + dy
 			lutro.audio.play(sfx_step)

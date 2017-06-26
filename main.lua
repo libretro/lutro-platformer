@@ -6,6 +6,7 @@ require "obake"
 require "coin"
 require "bigcoin"
 require "porc"
+require "elevator"
 
 function lutro.conf(t)
 	t.width  = SCREEN_WIDTH
@@ -17,6 +18,10 @@ local add_entity_from_map = function(object)
 		table.insert(entities, object)
 	elseif object.type == "bridge" then
 		table.insert(entities, object)
+	elseif object.type == "stopper" then
+		table.insert(entities, object)
+	elseif object.type == "elevator" then
+		table.insert(entities, newElevator(object))
 	elseif object.type == "spikes" then
 		table.insert(entities, object)
 	elseif object.type == "coin" then

@@ -48,10 +48,10 @@ function solid_at(x, y, exclude)
 
 		if  x >= e.x and x < e.x + e.width
 		and y >= e.y and y < e.y + e.height
-		and (e.type == "ground" or e.type == "bridge")
+		and (e.type == "ground" or e.type == "bridge" or e.type == "elevator")
 		and e ~= exclude
 		then
-			return true;
+			return e;
 		end
 	end
 	return false;
