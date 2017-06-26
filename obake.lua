@@ -20,9 +20,9 @@ function newObake(object)
 	n.animations = {
 		fly = {
 			left  = newAnimation(lutro.graphics.newImage(
-				"assets/obake_fly_left.png"),  48, 48, 100, 10),
+				"assets/obake_fly_left.png"),  48, 48, 5, 10),
 			right = newAnimation(lutro.graphics.newImage(
-				"assets/obake_fly_right.png"), 48, 48, 100, 10)
+				"assets/obake_fly_right.png"), 48, 48, 5, 10)
 		},
 		hit = {
 			left  = newAnimation(lutro.graphics.newImage(
