@@ -9,10 +9,13 @@ function newObake(object)
 	n.height = 16
 	n.xspeed = 0
 	n.yspeed = 0
+	n.xaccel = 0
 	n.direction = "left"
 	n.stance = "fly"
 	n.type = "obake"
 	n.t = 0
+	n.hit = 0
+	n.hp = 3
 
 	n.animations = {
 		fly = {
@@ -21,6 +24,12 @@ function newObake(object)
 			right = newAnimation(lutro.graphics.newImage(
 				"assets/obake_fly_right.png"), 48, 48, 100, 10)
 		},
+		hit = {
+			left  = newAnimation(lutro.graphics.newImage(
+				"assets/obake_hit_left.png"),  48, 48, 1, 10),
+			right = newAnimation(lutro.graphics.newImage(
+				"assets/obake_hit_right.png"), 48, 48, 1, 10)
+		},
 	}
 
 	n.anim = n.animations[n.stance][n.direction]
@@ -28,18 +37,35 @@ function newObake(object)
 end
 
 function obake:update(dt)
+
+	if self.hit > 0 then
+		self.hit = self.hit - 1
+	else
+		self.xaccel = 0
+		self.xspeed = 0
+	end
+
 	self.t = self.t + dt
 
 	-- apply speed
+	self.xspeed = self.xspeed + self.xaccel * dt;
 	self.x = self.x + self.xspeed * dt;
 
-	self.x = self.x + math.cos(self.t/2.0) / 2.0
-	self.y = self.y + math.cos(self.t*2.0) / 4.0
+	if self.stance == "fly" then
+		self.x = self.x + math.cos(self.t/2.0) / 2.0
+		self.y = self.y + math.cos(self.t*2.0) / 4.0
+	end
 
 	if self.x > ninja.x then
 		self.direction = "left"
 	else
 		self.direction = "right"
+	end
+
+	if self.hit > 0 then
+		self.stance = "hit"
+	else
+		self.stance = "fly"
 	end
 
 	local anim = self.animations[self.stance][self.direction]
@@ -57,5 +83,23 @@ function obake:draw()
 end
 
 function obake:on_collide(e1, e2, dx, dy)
+	if e2.type == "shuriken" then
+		self.hit = 30
+		if e2.direction == "left" then
+			self.xspeed = 100
+			self.xaccel = -100
+		else
+			self.xspeed = -100
+			self.xaccel = 100
+		end
 
+		lutro.audio.play(sfx_enemyhit)
+		self.hp = self.hp - 1
+
+		for i=1, #entities do
+			if entities[i] == e2 then
+				table.remove(entities, i)
+			end
+		end
+	end
 end

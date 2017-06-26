@@ -147,7 +147,7 @@ function ninja:update(dt)
 		self.DO_THROW = 0
 	end
 
-	if self.DO_THROW == 1 and self.throw <= 3 then
+	if self.DO_THROW == 1 and self.throw == 0 then
 		lutro.audio.play(sfx_throw)
 		self.throw = 15
 		table.insert(entities, newShuriken())

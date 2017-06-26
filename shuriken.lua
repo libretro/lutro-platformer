@@ -5,6 +5,7 @@ shuriken.__index = shuriken
 
 function newShuriken()
 	local n = {}
+	n.type = "shuriken"
 	n.y = ninja.y + 10
 	if ninja.direction == "right" then
 		n.speed = 6
@@ -31,5 +32,8 @@ function shuriken:draw()
 end
 
 function shuriken:on_collide(e1, e2, dx, dy)
-
+	if e2.type == "ground" then
+		self.speed = 0
+		self.anim.speed = 0
+	end
 end
