@@ -7,6 +7,7 @@ require "coin"
 require "bigcoin"
 require "porc"
 require "elevator"
+require "shuriken"
 
 function lutro.conf(t)
 	t.width  = SCREEN_WIDTH
@@ -58,6 +59,7 @@ function lutro.load()
 	sfx_hit = lutro.audio.newSource("assets/hit.wav")
 	sfx_porc = lutro.audio.newSource("assets/porc.wav")
 	sfx_dead = lutro.audio.newSource("assets/dead.wav")
+	sfx_throw = lutro.audio.newSource("assets/throw.wav")
 	sfx_gameover = lutro.audio.newSource("assets/gameover.wav")
 end
 
@@ -67,6 +69,7 @@ function lutro.update(dt)
 	JOY_RIGHT = lutro.input.joypad("right")
 	JOY_DOWN  = lutro.input.joypad("down")
 	JOY_A     = lutro.input.joypad("a")
+	JOY_B     = lutro.input.joypad("b")
 
 	if hp > 0 then
 		for i=1, #entities do

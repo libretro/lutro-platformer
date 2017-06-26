@@ -15,8 +15,10 @@ function newNinja(object)
 	n.stance = "fall"
 	n.type = "ninja"
 	n.DO_JUMP = 0
+	n.DO_THROW = 0
 	n.hit = 0
 	n.dying = 0
+	n.throw = 0
 
 	n.animations = {
 		stand = {
@@ -61,6 +63,12 @@ function newNinja(object)
 			right = newAnimation(lutro.graphics.newImage(
 				"assets/ninja_dead_right.png"), 48, 48, 100, 10)
 		},
+		throw = {
+			left  = newAnimation(lutro.graphics.newImage(
+				"assets/ninja_throw_left.png"),  48, 48, 1, 30),
+			right = newAnimation(lutro.graphics.newImage(
+				"assets/ninja_throw_right.png"), 48, 48, 1, 30)
+		},
 	}
 
 	n.anim = n.animations[n.stance][n.direction]
@@ -95,6 +103,12 @@ function ninja:update(dt)
 		return
 	end
 
+	if self.throw > 0 then
+		self.throw = self.throw - 1
+	else
+		self.throw = 0
+	end
+
 	if self.hit > 0 then
 		self.hit = self.hit - 1
 	end
@@ -125,6 +139,19 @@ function ninja:update(dt)
 	-- if self.DO_JUMP > 1 and self. DO_JUMP <= 50 and self.yspeed < 0 then
 	-- 	self.yspeed = self.yspeed - 10
 	-- end
+
+	-- throwing
+	if JOY_B then
+		self.DO_THROW = self.DO_THROW + 1
+	else
+		self.DO_THROW = 0
+	end
+
+	if self.DO_THROW == 1 and self.throw <= 3 then
+		lutro.audio.play(sfx_throw)
+		self.throw = 15
+		table.insert(entities, newShuriken())
+	end
 
 	-- moving
 	if JOY_LEFT then
@@ -184,6 +211,10 @@ function ninja:update(dt)
 			self.xspeed = 0
 			self.stance = "duck"
 		end
+	end
+
+	if self.throw > 0 then
+		self.stance = "throw"
 	end
 
 	if self.hit > 0 then
