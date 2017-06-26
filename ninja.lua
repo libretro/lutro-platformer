@@ -92,11 +92,11 @@ function ninja:update(dt)
 		if self.dying == 1 then
 			lutro.audio.play(sfx_dead)
 		end
-		if self.dying == 100 then
+		if self.dying == 40 then
 			lutro.audio.play(sfx_gameover)
 			self.yspeed = -300
 		end
-		if self.dying >= 100 then
+		if self.dying >= 40 then
 			self.yspeed = self.yspeed + self.yaccel * dt
 			self.y = self.y + dt * self.yspeed
 		end
