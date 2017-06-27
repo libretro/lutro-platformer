@@ -133,12 +133,13 @@ function lutro.draw()
 	lutro.graphics.translate(camera_x, camera_y)
 
 	tiled_draw_layer(map.layers[1])
+	tiled_draw_layer(map.layers[2])
 	for i=1, #entities do
 		if entities[i].draw then
 			entities[i]:draw(dt)
 		end
 	end
-	tiled_draw_layer(map.layers[2])
+
 
 	lutro.graphics.pop()
 
