@@ -25,6 +25,12 @@ end
 function shuriken:update(dt)
 	self.anim:update(dt)
 	self.x = self.x + self.speed
+
+	if self.x > SCREEN_WIDTH - camera_x
+	or self.x < - camera_x
+	then
+		entities_remove(self)
+	end
 end
 
 function shuriken:draw()

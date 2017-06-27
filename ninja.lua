@@ -271,7 +271,7 @@ function ninja:on_collide(e1, e2, dx, dy)
 
 		hp = 0
 
-	elseif (e2.type == "obake" or e2.type == "porc") and self.hit == 0 then
+	elseif (e2.type == "obake" or e2.type == "porc") and self.hit == 0 and e2.die == 0 then
 
 		lutro.audio.play(sfx_hit)
 		screen_shake = 0.25

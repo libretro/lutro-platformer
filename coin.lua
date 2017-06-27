@@ -15,7 +15,7 @@ end
 function coin:update(dt)
 	if self.collect > 0 then
 		self.collect = self.collect - 1
-		self.x = self.x + (320 - camera_x - self.x - self.width)/10
+		self.x = self.x + (SCREEN_WIDTH - camera_x - self.x - self.width)/10
 		self.y = self.y + (  0 - camera_y - self.y)/10
 	end
 	if self.collect == 1 then
