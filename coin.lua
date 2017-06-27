@@ -20,6 +20,7 @@ function coin:update(dt)
 	end
 	if self.collect == 1 then
 		entities_remove(self)
+		gold = gold + 1
 	end
 
 	self.anim:update(dt)
@@ -32,9 +33,7 @@ end
 function coin:on_collide(e1, e2, dx, dy)
 	if e2.type == "ninja" then
 		lutro.audio.play(sfx_coin)
-		--entities_remove(self)
 		self.collect = 30
 		self.on_collide = nil
-		gold = gold + 1
 	end
 end

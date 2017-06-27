@@ -57,11 +57,11 @@ function lutro.load()
 	lutro.graphics.setBackgroundColor(0, 0, 0)
 	bg1 = lutro.graphics.newImage("assets/forestbackground.png")
 	bg2 = lutro.graphics.newImage("assets/foresttrees.png")
-	font = lutro.graphics.newImageFont("assets/font.png",
-		" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!?-+/")
-	goldfont = lutro.graphics.newImageFont("assets/gold_font.png",
-		"0123456789 xG")
-	lutro.graphics.setFont(font)
+	--font = lutro.graphics.newImageFont("assets/font.png",
+	--	" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!?-+/")
+	barfont = lutro.graphics.newImageFont("assets/barfont.png",
+		"0123456789 xGHh")
+	lutro.graphics.setFont(barfont)
 	map = tiled_load("assets/level1.json")
 	tiled_load_objects(map, add_entity_from_map)
 
@@ -139,8 +139,14 @@ function lutro.draw()
 
 	lutro.graphics.pop()
 
-	lutro.graphics.setFont(font)
-	lutro.graphics.print("HP " .. hp, 3, 1)
-	lutro.graphics.setFont(goldfont)
-	lutro.graphics.printf(gold .. "xG", -3, 1, SCREEN_WIDTH, "right")
+	local bar = ""
+	for i=1, 3 do
+		if i <= hp then
+			bar = bar .. "H"
+		else
+			bar = bar .. "h"
+		end
+	end
+	lutro.graphics.print(bar, 3, 2)
+	lutro.graphics.printf(gold .. "xG", -1, 2, SCREEN_WIDTH, "right")
 end
