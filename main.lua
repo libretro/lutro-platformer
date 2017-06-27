@@ -74,7 +74,7 @@ function lutro.update(dt)
 
 	if hp > 0 then
 		for i=1, #entities do
-			if entities[i].update then
+			if entities[i] and entities[i].update then
 				entities[i]:update(dt)
 			end
 		end

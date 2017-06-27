@@ -15,6 +15,7 @@ function newObake(object)
 	n.type = "obake"
 	n.t = 0
 	n.hit = 0
+	n.die = 0
 	n.hp = 3
 
 	n.animations = {
@@ -43,6 +44,18 @@ function obake:update(dt)
 	else
 		self.xaccel = 0
 		self.xspeed = 0
+	end
+
+	if self.die > 0 then
+		self.die = self.die - 1
+	end
+
+	if self.die == 1 then
+		for i=1, #entities do
+			if entities[i] == self then
+				table.remove(entities, i)
+			end
+		end
 	end
 
 	self.t = self.t + dt
@@ -83,9 +96,9 @@ function obake:draw()
 end
 
 function obake:on_collide(e1, e2, dx, dy)
-	if e2.type == "shuriken" then
+	if e2.type == "shuriken" and self.hit == 0 and self.die == 0 then
 		self.hit = 30
-		if e2.direction == "left" then
+		if e2.speed > 0 then
 			self.xspeed = 100
 			self.xaccel = -100
 		else
@@ -100,6 +113,10 @@ function obake:on_collide(e1, e2, dx, dy)
 			if entities[i] == e2 then
 				table.remove(entities, i)
 			end
+		end
+
+		if self.hp <= 0 then
+			self.die = 30
 		end
 	end
 end
