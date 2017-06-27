@@ -42,6 +42,8 @@ end
 function lutro.load()
 	camera_x = 0
 	camera_y = 0
+	camera_x_offset = 0
+	camera_y_offset = 0
 	gold = 0
 	hp = 3
 	lutro.graphics.setBackgroundColor(0, 0, 0)
@@ -86,6 +88,16 @@ function lutro.update(dt)
 
 	-- camera
 	camera_x = - ninja.x + SCREEN_WIDTH/2 - ninja.width/2;
+	if ninja.direction == "right" then
+		if JOY_RIGHT and camera_x_offset > -48 then
+			camera_x_offset = camera_x_offset - 1
+		end
+	else
+		if JOY_LEFT and camera_x_offset < 48 then
+			camera_x_offset = camera_x_offset + 1
+		end
+	end
+	camera_x = camera_x + camera_x_offset
 	if camera_x > 0 then
 		camera_x = 0
 	end
