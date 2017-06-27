@@ -156,6 +156,7 @@ function porc:on_collide(e1, e2, dx, dy)
 			self.GOLEFT = not self.GOLEFT
 		end
 	elseif e2.type == "shuriken" and (self.hit == 0 or self.hit < 20) and self.die == 0 then
+		entities_remove(e2)
 		self.hp = self.hp - 1
 		if self.hp <= 0 then 
 			lutro.audio.play(sfx_porcdie)
