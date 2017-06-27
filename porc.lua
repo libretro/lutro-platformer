@@ -5,8 +5,8 @@ porc.__index = porc
 
 function newPorc(object)
 	local n = object
-	n.width = 14
-	n.height = 14
+	n.width = 32
+	n.height = 32
 	n.xspeed = 0
 	n.yspeed = 0
 	n.yaccel = 0.05
@@ -26,18 +26,18 @@ function newPorc(object)
 			right = newAnimation(lutro.graphics.newImage(
 				"assets/porc_run_right.png"), 32, 32, 2, 20)
 		},
-		-- hit = {
-		-- 	left  = newAnimation(lutro.graphics.newImage(
-		-- 		"assets/porc_hit_left.png"),  32, 32, 1, 60),
-		-- 	right = newAnimation(lutro.graphics.newImage(
-		-- 		"assets/porc_hit_right.png"), 32, 32, 1, 60)
-		-- },
-		-- die = {
-		-- 	left  = newAnimation(lutro.graphics.newImage(
-		-- 		"assets/porc_die_left.png"),  32, 32, 1, 60),
-		-- 	right = newAnimation(lutro.graphics.newImage(
-		-- 		"assets/porc_die_right.png"), 32, 32, 1, 60)
-		-- },
+		hit = {
+			left  = newAnimation(lutro.graphics.newImage(
+				"assets/porc_hit_left.png"),  32, 32, 1, 60),
+			right = newAnimation(lutro.graphics.newImage(
+				"assets/porc_hit_right.png"), 32, 32, 1, 60)
+		},
+		die = {
+			left  = newAnimation(lutro.graphics.newImage(
+				"assets/porc_hit_left.png"),  32, 32, 1, 60),
+			right = newAnimation(lutro.graphics.newImage(
+				"assets/porc_hit_right.png"), 32, 32, 1, 60)
+		},
 	}
 
 	n.anim = n.animations[n.stance][n.direction]
@@ -46,8 +46,8 @@ function newPorc(object)
 end
 
 function porc:on_the_ground()
-	return solid_at(self.x + 1, self.y+14, self)
-		or solid_at(self.x + 13, self.y+14, self)
+	return solid_at(self.x + 0, self.y+32, self)
+		or solid_at(self.x + 32, self.y+32, self)
 end
 
 function porc:update(dt)
@@ -82,8 +82,8 @@ function porc:update(dt)
 		self.y = self.y + self.yspeed
 	end
 
-	if not solid_at(self.x     , self.y+14, self) and self.GOLEFT 
-	or not solid_at(self.x + 13, self.y+14, self) and not self.GOLEFT 
+	if not solid_at(self.x     , self.y+32, self) and self.GOLEFT 
+	or not solid_at(self.x + 32, self.y+32, self) and not self.GOLEFT 
 	then
 		self.GOLEFT = not self.GOLEFT
 	end
@@ -133,7 +133,7 @@ function porc:update(dt)
 end
 
 function porc:draw()
-	self.anim:draw(self.x - 9, self.y - 18)
+	self.anim:draw(self.x, self.y)
 end
 
 function porc:on_collide(e1, e2, dx, dy)
@@ -155,14 +155,14 @@ function porc:on_collide(e1, e2, dx, dy)
 			self.xspeed = 0
 			self.GOLEFT = not self.GOLEFT
 		end
-	elseif e2.type == "saber" and (self.hit == 0 or self.hit < 20) and self.die == 0 then
+	elseif e2.type == "shuriken" and (self.hit == 0 or self.hit < 20) and self.die == 0 then
 		self.hp = self.hp - 1
 		if self.hp <= 0 then 
-			lutro.audio.play(sfx_robot_die)
+			lutro.audio.play(sfx_porcdie)
 			self.die = 60
 			self.xspeed = 0
 		else
-			lutro.audio.play(sfx_robot_hit)
+			lutro.audio.play(sfx_porchit)
 			self.hit = 60
 			if dx > 0 then
 				self.xspeed = 2
