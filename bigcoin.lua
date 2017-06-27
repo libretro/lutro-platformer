@@ -25,11 +25,7 @@ end
 function bigcoin:on_collide(e1, e2, dx, dy)
 	if e2.type == "ninja" then
 		lutro.audio.play(sfx_coin)
-		for i=1, #entities do
-			if entities[i] == self then
-				table.remove(entities, i)
-			end
-		end
+		entities_remove(self)
 		gold = gold + 10
 	end
 end

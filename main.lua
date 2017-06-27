@@ -39,6 +39,14 @@ local add_entity_from_map = function(object)
 	end
 end
 
+function entities_remove(entity)
+	for i=1, #entities do
+		if entities[i] == entity then
+			table.remove(entities, i)
+		end
+	end
+end
+
 function lutro.load()
 	camera_x = 0
 	camera_y = 0

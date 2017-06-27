@@ -51,11 +51,7 @@ function obake:update(dt)
 	end
 
 	if self.die == 1 then
-		for i=1, #entities do
-			if entities[i] == self then
-				table.remove(entities, i)
-			end
-		end
+		entities_remove(self)
 	end
 
 	self.t = self.t + dt
@@ -109,11 +105,7 @@ function obake:on_collide(e1, e2, dx, dy)
 		lutro.audio.play(sfx_enemyhit)
 		self.hp = self.hp - 1
 
-		for i=1, #entities do
-			if entities[i] == e2 then
-				table.remove(entities, i)
-			end
-		end
+		entities_remove(e2)
 
 		if self.hp <= 0 then
 			lutro.audio.play(sfx_enemydie)

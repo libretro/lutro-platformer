@@ -72,11 +72,7 @@ function porc:update(dt)
 		-- 	table.insert(entities, newPart(
 		-- 		{x = self.x + self.width/2, y = self.y + self.height / 2}))
 		-- end
-		for i=1, #entities do
-			if entities[i] == self then
-				table.remove(entities, i)
-			end
-		end
+		entities_remove(self)
 
 	end
 
