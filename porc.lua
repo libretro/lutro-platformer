@@ -7,6 +7,7 @@ function newPorc(object)
 	local n = object
 	n.width = 32
 	n.height = 32
+	n.speed = 0.85
 	n.xspeed = 0
 	n.yspeed = 0
 	n.yaccel = 0.05
@@ -25,6 +26,12 @@ function newPorc(object)
 				"assets/porc_run_left.png"),  32, 32, 2, 20),
 			right = newAnimation(lutro.graphics.newImage(
 				"assets/porc_run_right.png"), 32, 32, 2, 20)
+		},
+		angry = {
+			left  = newAnimation(lutro.graphics.newImage(
+				"assets/porc_angry_left.png"),  32, 32, 2, 40),
+			right = newAnimation(lutro.graphics.newImage(
+				"assets/porc_angry_right.png"), 32, 32, 2, 40)
 		},
 		hit = {
 			left  = newAnimation(lutro.graphics.newImage(
@@ -76,6 +83,12 @@ function porc:update(dt)
 
 	end
 
+	if self.hp == 3 then
+		self.speed = 1
+	else
+		self.speed = 2
+	end
+
 	-- gravity
 	if not self:on_the_ground() then
 		self.yspeed = self.yspeed + self.yaccel
@@ -90,10 +103,10 @@ function porc:update(dt)
 
 	-- moving
 	if self.GOLEFT and self.hit == 0 and self.die == 0 then
-		self.xspeed = -0.85
+		self.xspeed = -self.speed
 		self.direction = "left"
 	elseif self.hit == 0 and self.die == 0 then
-		self.xspeed = 0.85
+		self.xspeed = self.speed
 		self.direction = "right"
 	end
 
@@ -118,6 +131,8 @@ function porc:update(dt)
 		self.stance = "die"
 	elseif self.hit > 0 then
 		self.stance = "hit"
+	elseif self.hp < 3 then
+		self.stance = "angry"
 	else
 		self.stance = "run"
 	end
