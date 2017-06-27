@@ -16,6 +16,7 @@ function newShuriken()
 	end
 	n.width = 8
 	n.height = 8
+	n.die = 0
 
 	n.anim = newAnimation(lutro.graphics.newImage(
 				"assets/shuriken.png"), 8, 8, 1, 60)
@@ -23,6 +24,13 @@ function newShuriken()
 end
 
 function shuriken:update(dt)
+	if self.die > 0 then
+		self.die = self.die - 1
+	end
+	if self.die == 1 then
+		entities_remove(self)
+	end
+
 	self.anim:update(dt)
 	self.x = self.x + self.speed
 
@@ -38,8 +46,10 @@ function shuriken:draw()
 end
 
 function shuriken:on_collide(e1, e2, dx, dy)
-	if e2.type == "ground" then
+	if e2.type == "ground" and self.die == 0 then
 		self.speed = 0
 		self.anim.speed = 0
+		self.die = 30
+		lutro.audio.play(sfx_shurikencollide)
 	end
 end

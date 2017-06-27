@@ -77,6 +77,7 @@ function lutro.load()
 	sfx_enemydie = lutro.audio.newSource("assets/enemydie.wav")
 	sfx_porchit = lutro.audio.newSource("assets/porchit.wav")
 	sfx_porcdie = lutro.audio.newSource("assets/porcdie.wav")
+	sfx_shurikencollide = lutro.audio.newSource("assets/shurikencollide.wav")
 end
 
 function lutro.update(dt)
