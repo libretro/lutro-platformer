@@ -116,6 +116,7 @@ function obake:on_collide(e1, e2, dx, dy)
 		end
 
 		if self.hp <= 0 then
+			lutro.audio.play(sfx_enemydie)
 			self.die = 30
 		end
 	end

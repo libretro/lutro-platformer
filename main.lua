@@ -64,6 +64,7 @@ function lutro.load()
 	sfx_throw = lutro.audio.newSource("assets/throw.wav")
 	sfx_gameover = lutro.audio.newSource("assets/gameover.wav")
 	sfx_enemyhit = lutro.audio.newSource("assets/enemyhit.wav")
+	sfx_enemydie = lutro.audio.newSource("assets/enemydie.wav")
 end
 
 function lutro.update(dt)
