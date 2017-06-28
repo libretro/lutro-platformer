@@ -54,15 +54,16 @@ function lutro.load()
 	camera_y_offset = 0
 	gold = 0
 	hp = 3
+
 	lutro.graphics.setBackgroundColor(0, 0, 0)
+
 	bg0 = lutro.graphics.newImage("assets/forestbackground0.png")
 	bg1 = lutro.graphics.newImage("assets/forestbackground1.png")
 	bg2 = lutro.graphics.newImage("assets/forestbackground2.png")
-	--font = lutro.graphics.newImageFont("assets/font.png",
-	--	" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,!?-+/")
-	barfont = lutro.graphics.newImageFont("assets/barfont.png",
-		"0123456789 xGHh")
+
+	barfont = lutro.graphics.newImageFont("assets/barfont.png", "0123456789 xGHh")
 	lutro.graphics.setFont(barfont)
+
 	map = tiled_load("assets/level1.json")
 	tiled_load_objects(map, add_entity_from_map)
 
@@ -141,7 +142,6 @@ function lutro.draw()
 			entities[i]:draw(dt)
 		end
 	end
-
 
 	lutro.graphics.pop()
 
