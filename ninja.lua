@@ -142,8 +142,13 @@ function ninja:update(dt)
 	end
 
 	-- variable jump height
-	if self.DO_JUMP > 1 and self. DO_JUMP <= 50 and self.yspeed < 0 then
+	if self.DO_JUMP > 1 and self.DO_JUMP <= 50 and self.yspeed < 0 then
 		self.yspeed = self.yspeed - 4
+	end
+
+	-- additionnal frames of hang time at the top of a high jump
+	if not on_the_ground and self.DO_JUMP > 1 and math.abs(self.yspeed) <= 20 then
+		self.y = self.y - dt * self.yspeed
 	end
 
 	-- throwing
