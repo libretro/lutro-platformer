@@ -10,7 +10,7 @@ function newNinja(object)
 	n.xspeed = 0
 	n.yspeed = 0
 	n.xaccel = 200
-	n.yaccel = 1000
+	n.yaccel = 600
 	n.direction = "right"
 	n.stance = "fall"
 	n.type = "ninja"
@@ -131,7 +131,7 @@ function ninja:update(dt)
 		self.y = self.y + 3
 	elseif self.DO_JUMP == 1 and self:on_the_ground() then
 		self.y = self.y - 1
-		self.yspeed = -330
+		self.yspeed = -250
 		lutro.audio.play(sfx_jump)
 	end
 
@@ -156,16 +156,16 @@ function ninja:update(dt)
 	-- moving
 	if JOY_LEFT and self.hit == 0 then
 		self.xspeed = self.xspeed - self.xaccel * dt;
-		if self.xspeed < -200 then
-			self.xspeed = -200
+		if self.xspeed < -160 then
+			self.xspeed = -160
 		end
 		self.direction = "left";
 	end
 
 	if JOY_RIGHT and self.hit == 0 then
 		self.xspeed = self.xspeed + self.xaccel * dt;
-		if self.xspeed > 200 then
-			self.xspeed = 200
+		if self.xspeed > 160 then
+			self.xspeed = 160
 		end
 		self.direction = "right";
 	end
