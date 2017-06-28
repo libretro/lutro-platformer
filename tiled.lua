@@ -11,6 +11,21 @@ function tiled_load(filename)
 		tileset.sh = tileset.surface:getHeight()
 	end
 
+	-- cache the corresponding tileset for each tile
+	map.tileset_for_id = {}
+	for i = 1, #map.layers do
+		local layer = map.layers[i]
+		if layer.type == "tilelayer" then
+			local data = layer.data
+			for j = 1, #data do
+				local id = data[j]
+				if (id > 0) then
+					map.tileset_for_id[id] = tiled_get_tileset(map, id)
+				end
+			end
+		end
+	end
+
     return map
 end
 
@@ -32,7 +47,7 @@ function tiled_draw_layer(layer)
 		if (id > 0) then
 			local y = math.floor((j-1) / layer.width) * map.tileheight
 			local x = ((j-1) % layer.width) * map.tilewidth
-			local t = tiled_get_tileset(map, id)
+			local t = map.tileset_for_id[id]
 			local tw = map.tilewidth
 			local th = map.tileheight
 			local sw = t.sw
