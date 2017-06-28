@@ -9,9 +9,12 @@ function newNinja(object)
 	n.height = 32
 	n.xspeed = 0
 	n.yspeed = 0
-	n.xaccel = 200
+	n.xaccel = 300
 	n.yaccel = 600
 	n.max_xspeed = 160
+	n.friction = 10
+	n.groundfriction = 20
+	n.airfriction = 1
 	n.direction = "right"
 	n.stance = "fall"
 	n.type = "ninja"
@@ -173,17 +176,18 @@ function ninja:update(dt)
 	self.x = self.x + self.xspeed * dt;
 
 	-- decelerating
+	self.friction = on_the_ground and self.groundfriction or self.airfriction
+
 	if  not (JOY_RIGHT and self.xspeed > 0)
 	and not (JOY_LEFT  and self.xspeed < 0)
-	and on_the_ground
 	then
 		if self.xspeed > 0 then
-			self.xspeed = self.xspeed - 10
+			self.xspeed = self.xspeed - self.friction
 			if self.xspeed < 0 then
 				self.xspeed = 0;
 			end
 		elseif self.xspeed < 0 then
-			self.xspeed = self.xspeed + 10;
+			self.xspeed = self.xspeed + self.friction;
 			if self.xspeed > 0 then
 				self.xspeed = 0;
 			end
