@@ -85,6 +85,8 @@ end
 
 function ninja:update(dt)
 
+	local on_the_ground = self:on_the_ground()
+
 	if hp <= 0 then
 		self.dying = self.dying + 1
 		self.anim = self.animations["dead"][self.direction]
@@ -114,7 +116,7 @@ function ninja:update(dt)
 	end
 
 	-- gravity
-	if not self:on_the_ground() then
+	if not on_the_ground then
 		self.yspeed = self.yspeed + self.yaccel * dt
 		self.y = self.y + dt * self.yspeed
 	end
@@ -129,7 +131,7 @@ function ninja:update(dt)
 	if self.DO_JUMP == 1 and JOY_DOWN
 	and not solid_at(self.x + 8, self.y + 32 + 3) then
 		self.y = self.y + 3
-	elseif self.DO_JUMP == 1 and self:on_the_ground() then
+	elseif self.DO_JUMP == 1 and on_the_ground then
 		self.y = self.y - 1
 		self.yspeed = -250
 		lutro.audio.play(sfx_jump)
@@ -176,7 +178,7 @@ function ninja:update(dt)
 	-- decelerating
 	if  not (JOY_RIGHT and self.xspeed > 0)
 	and not (JOY_LEFT  and self.xspeed < 0)
-	and self:on_the_ground()
+	and on_the_ground
 	then
 		if self.xspeed > 0 then
 			self.xspeed = self.xspeed - 10
@@ -192,7 +194,7 @@ function ninja:update(dt)
 	end
 
 	-- animations
-	if self:on_the_ground() then
+	if on_the_ground then
 		if self.xspeed == 0 then
 			self.stance = "stand"
 		else
@@ -207,7 +209,7 @@ function ninja:update(dt)
 	end
 
 	if JOY_DOWN then
-		if self:on_the_ground() then
+		if on_the_ground then
 			self.xspeed = 0
 			self.stance = "duck"
 		end
