@@ -9,12 +9,12 @@ function newNinja(object)
 	n.height = 32
 	n.xspeed = 0
 	n.yspeed = 0
-	n.xaccel = 300
+	n.xaccel = 900
 	n.yaccel = 600
-	n.max_xspeed = 160
-	n.friction = 10
+	n.max_xspeed = 150
+	n.friction = 20
 	n.groundfriction = 20
-	n.airfriction = 1
+	n.airfriction = 2
 	n.direction = "right"
 	n.stance = "fall"
 	n.type = "ninja"
@@ -137,14 +137,14 @@ function ninja:update(dt)
 		self.y = self.y + 3
 	elseif self.DO_JUMP == 1 and on_the_ground then
 		self.y = self.y - 1
-		self.yspeed = -250
+		self.yspeed = -210
 		lutro.audio.play(sfx_jump)
 	end
 
 	-- variable jump height
-	-- if self.DO_JUMP > 1 and self. DO_JUMP <= 50 and self.yspeed < 0 then
-	-- 	self.yspeed = self.yspeed - 10
-	-- end
+	if self.DO_JUMP > 1 and self. DO_JUMP <= 50 and self.yspeed < 0 then
+		self.yspeed = self.yspeed - 4
+	end
 
 	-- throwing
 	if JOY_B and self.hit == 0 then
