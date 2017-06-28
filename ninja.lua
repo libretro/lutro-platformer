@@ -12,6 +12,7 @@ function newNinja(object)
 	n.xaccel = 900
 	n.yaccel = 600
 	n.max_xspeed = 150
+	n.max_yspeed = 280
 	n.friction = 20
 	n.groundfriction = 20
 	n.airfriction = 2
@@ -122,6 +123,7 @@ function ninja:update(dt)
 	-- gravity
 	if not on_the_ground then
 		self.yspeed = self.yspeed + self.yaccel * dt
+		self.yspeed = math.min(self.yspeed, self.max_yspeed)
 		self.y = self.y + dt * self.yspeed
 	end
 
@@ -183,8 +185,7 @@ function ninja:update(dt)
 	-- decelerating
 	self.friction = on_the_ground and self.groundfriction or self.airfriction
 
-	if  not (JOY_RIGHT and self.xspeed > 0)
-	and not (JOY_LEFT  and self.xspeed < 0)
+	if  not JOY_RIGHT and not JOY_LEFT
 	then
 		if self.xspeed > 0 then
 			self.xspeed = self.xspeed - self.friction
