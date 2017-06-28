@@ -5,8 +5,8 @@ porc.__index = porc
 
 function newPorc(object)
 	local n = object
-	n.width = 32
-	n.height = 32
+	n.width = 22
+	n.height = 26
 	n.speed = 0.85
 	n.xspeed = 0
 	n.yspeed = 0
@@ -53,8 +53,8 @@ function newPorc(object)
 end
 
 function porc:on_the_ground()
-	return solid_at(self.x + 0, self.y+32, self)
-		or solid_at(self.x + 32, self.y+32, self)
+	return solid_at(self.x + 5, self.y+26, self)
+		or solid_at(self.x + 27, self.y+26, self)
 end
 
 function porc:update(dt)
@@ -148,7 +148,7 @@ function porc:update(dt)
 end
 
 function porc:draw()
-	self.anim:draw(self.x, self.y)
+	self.anim:draw(self.x + 5, self.y - 6)
 end
 
 function porc:on_collide(e1, e2, dx, dy)
@@ -170,7 +170,7 @@ function porc:on_collide(e1, e2, dx, dy)
 			self.xspeed = 0
 			self.GOLEFT = not self.GOLEFT
 		end
-	elseif e2.type == "shuriken" and (self.hit == 0 or self.hit < 20) and self.die == 0 then
+	elseif e2.type == "shuriken" and self.hit == 0 and self.die == 0 then
 		entities_remove(e2)
 		self.hp = self.hp - 1
 		if self.hp <= 0 then 
