@@ -31,7 +31,7 @@ function coin:draw()
 end
 
 function coin:on_collide(e1, e2, dx, dy)
-	if e2.type == "ninja" then
+	if e2.type == "ninja" and e2.hit == 0 and e2.dying == 0 then
 		lutro.audio.play(sfx_coin)
 		self.collect = 30
 		self.on_collide = nil
