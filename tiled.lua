@@ -12,7 +12,7 @@ function tiled_load(filename)
 	end
 
 	-- cache the corresponding tileset for each tile
-	map.tileset_for_id = {}
+	map.by_id = {}
 	for i = 1, #map.layers do
 		local layer = map.layers[i]
 		if layer.type == "tilelayer" then
@@ -20,7 +20,27 @@ function tiled_load(filename)
 			for j = 1, #data do
 				local id = data[j]
 				if (id > 0) then
-					map.tileset_for_id[id] = tiled_get_tileset(map, id)
+					map.by_id[id] = {}
+
+					local y = math.floor((j-1) / layer.width) * map.tileheight
+					local x = ((j-1) % layer.width) * map.tilewidth
+					local t = tiled_get_tileset(map, id)
+					local tw = map.tilewidth
+					local th = map.tileheight
+					local sw = t.sw
+					local sh = t.sh
+					local tid = id - t.firstgid + 1
+
+					local q = lutro.graphics.newQuad(
+						((tid-1)%(sw/tw))*tw,
+						math.floor((tid-1)/(sw/tw))*tw,
+						tw, th,
+						sw, sh)
+
+					map.by_id[id].t = t
+					map.by_id[id].q = q
+					map.by_id[id].x = x
+					map.by_id[id].y = y
 				end
 			end
 		end
@@ -45,22 +65,12 @@ function tiled_draw_layer(layer)
 	for j = 1, #data do
 		local id = data[j]
 		if (id > 0) then
+			local cache = map.by_id[id]
+
 			local y = math.floor((j-1) / layer.width) * map.tileheight
 			local x = ((j-1) % layer.width) * map.tilewidth
-			local t = map.tileset_for_id[id]
-			local tw = map.tilewidth
-			local th = map.tileheight
-			local sw = t.sw
-			local sh = t.sh
-			local tid = id - t.firstgid + 1
 
-			local q = lutro.graphics.newQuad(
-				((tid-1)%(sw/tw))*tw,
-				math.floor((tid-1)/(sw/tw))*tw,
-				tw, th,
-				sw, sh)
-
-			lutro.graphics.draw(t.surface, q, x, y)
+			lutro.graphics.draw(cache.t.surface, cache.q, x, y)
 		end
 	end
 end
