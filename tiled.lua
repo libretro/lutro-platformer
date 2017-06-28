@@ -7,6 +7,8 @@ function tiled_load(filename)
 	for i = 1, #map.tilesets do
 		local tileset = map.tilesets[i]
 		tileset.surface = lutro.graphics.newImage("assets/" .. tileset.image)
+		tileset.sw = tileset.surface:getWidth()
+		tileset.sh = tileset.surface:getHeight()
 	end
 
     return map
@@ -33,9 +35,9 @@ function tiled_draw_layer(layer)
 			local t = tiled_get_tileset(map, id)
 			local tw = map.tilewidth
 			local th = map.tileheight
-			local sw = t.surface:getWidth()
-			local sh = t.surface:getHeight()
-			local tid = id - t.firstgid+1
+			local sw = t.sw
+			local sh = t.sh
+			local tid = id - t.firstgid + 1
 
 			local q = lutro.graphics.newQuad(
 				((tid-1)%(sw/tw))*tw,
