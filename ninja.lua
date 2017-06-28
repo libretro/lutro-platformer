@@ -11,6 +11,7 @@ function newNinja(object)
 	n.yspeed = 0
 	n.xaccel = 200
 	n.yaccel = 600
+	n.max_xspeed = 160
 	n.direction = "right"
 	n.stance = "fall"
 	n.type = "ninja"
@@ -158,17 +159,13 @@ function ninja:update(dt)
 	-- moving
 	if JOY_LEFT and self.hit == 0 then
 		self.xspeed = self.xspeed - self.xaccel * dt;
-		if self.xspeed < -160 then
-			self.xspeed = -160
-		end
+		self.xspeed = math.max(self.xspeed, -self.max_xspeed)
 		self.direction = "left";
 	end
 
 	if JOY_RIGHT and self.hit == 0 then
 		self.xspeed = self.xspeed + self.xaccel * dt;
-		if self.xspeed > 160 then
-			self.xspeed = 160
-		end
+		self.xspeed = math.min(self.xspeed, self.max_xspeed)
 		self.direction = "right";
 	end
 
