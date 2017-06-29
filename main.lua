@@ -8,6 +8,7 @@ require "bigcoin"
 require "porc"
 require "elevator"
 require "shuriken"
+require "sword"
 
 function lutro.conf(t)
 	t.width  = SCREEN_WIDTH
@@ -89,6 +90,7 @@ function lutro.update(dt)
 	JOY_DOWN  = lutro.input.joypad("down")
 	JOY_A     = lutro.input.joypad("a")
 	JOY_B     = lutro.input.joypad("b")
+	JOY_Y     = lutro.input.joypad("y")
 
 	if hp > 0 then
 		for i=1, #entities do

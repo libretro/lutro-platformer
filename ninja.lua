@@ -21,9 +21,11 @@ function newNinja(object)
 	n.type = "ninja"
 	n.DO_JUMP = 0
 	n.DO_THROW = 0
+	n.DO_SWORD = 0
 	n.hit = 0
 	n.dying = 0
 	n.throw = 0
+	n.sword = 0
 
 	n.animations = {
 		stand = {
@@ -74,6 +76,12 @@ function newNinja(object)
 			right = newAnimation(lutro.graphics.newImage(
 				"assets/ninja_throw_right.png"), 48, 48, 1, 30)
 		},
+		sword = {
+			left  = newAnimation(lutro.graphics.newImage(
+				"assets/ninja_sword_left.png"),  48, 48, 1, 15),
+			right = newAnimation(lutro.graphics.newImage(
+				"assets/ninja_sword_right.png"), 48, 48, 1, 15)
+		},
 	}
 
 	n.anim = n.animations[n.stance][n.direction]
@@ -114,6 +122,15 @@ function ninja:update(dt)
 		self.throw = self.throw - 1
 	else
 		self.throw = 0
+	end
+
+	if self.sword > 0 then
+		self.sword = self.sword - 1
+	else
+		self.sword = 0
+	end
+	if self.sword == 1 then
+		entities_remove(sword)
 	end
 
 	if self.hit > 0 then
@@ -164,6 +181,20 @@ function ninja:update(dt)
 		lutro.audio.play(sfx_throw)
 		self.throw = 15
 		table.insert(entities, newShuriken())
+	end
+
+	-- sword swinging
+	if JOY_Y and self.hit == 0 then
+		self.DO_SWORD = self.DO_SWORD + 1
+	else
+		self.DO_SWORD = 0
+	end
+
+	if self.DO_SWORD == 1 and self.sword == 0 then
+		lutro.audio.play(sfx_throw)
+		self.sword = 30
+		sword = newSword(self)
+		table.insert(entities, sword)
 	end
 
 	-- moving
@@ -224,6 +255,10 @@ function ninja:update(dt)
 
 	if self.throw > 0 then
 		self.stance = "throw"
+	end
+
+	if self.sword > 0 then
+		self.stance = "sword"
 	end
 
 	if self.hit > 0 then
