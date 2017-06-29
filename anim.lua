@@ -11,6 +11,7 @@ function newAnimation(image, width, height, period, speed)
 	a.speed = speed
 	a.period = period
 	a.steps = a.image:getWidth() / a.width
+	a.id = 1
 	return setmetatable(a, animation)
 end
 
@@ -25,15 +26,15 @@ function animation:update(dt)
 end
 
 function animation:draw(x, y)
-	local id = math.floor(self.timer / self.period + 1)
+	self.id = math.floor(self.timer / self.period + 1)
 	local tw = self.width
 	local th = self.height
 	local sw = self.image:getWidth()
 	local sh = self.image:getHeight()
 
 	local q = lutro.graphics.newQuad(
-		((id-1)%(sw/tw))*tw,
-		math.floor((id-1)/(sw/tw))*tw,
+		((self.id-1)%(sw/tw))*tw,
+		math.floor((self.id-1)/(sw/tw))*tw,
 		tw, th,
 		sw, sh)
 

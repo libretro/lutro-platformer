@@ -145,7 +145,7 @@ function ninja:update(dt)
 	end
 
 	-- jumping
-	if JOY_A and self.hit == 0 then
+	if JOY_B and self.hit == 0 then
 		self.DO_JUMP = self.DO_JUMP + 1
 	else
 		self.DO_JUMP = 0
@@ -171,7 +171,7 @@ function ninja:update(dt)
 	end
 
 	-- throwing
-	if JOY_B and self.hit == 0 then
+	if JOY_A and self.hit == 0 then
 		self.DO_THROW = self.DO_THROW + 1
 	else
 		self.DO_THROW = 0
@@ -198,13 +198,13 @@ function ninja:update(dt)
 	end
 
 	-- moving
-	if JOY_LEFT and self.hit == 0 then
+	if JOY_LEFT and self.hit == 0 and self.sword == 0 then
 		self.xspeed = self.xspeed - self.xaccel * dt;
 		self.xspeed = math.max(self.xspeed, -self.max_xspeed)
 		self.direction = "left";
 	end
 
-	if JOY_RIGHT and self.hit == 0 then
+	if JOY_RIGHT and self.hit == 0 and self.sword == 0 then
 		self.xspeed = self.xspeed + self.xaccel * dt;
 		self.xspeed = math.min(self.xspeed, self.max_xspeed)
 		self.direction = "right";

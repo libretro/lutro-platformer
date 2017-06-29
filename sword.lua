@@ -6,15 +6,16 @@ sword.__index = sword
 function newSword(parent)
 	local n = {}
 	n.type = "sword"
-	n.y = parent.y - 16
-	n.direction = parent.direction
+	n.y = parent.y - 16 + 14
+	n.parent = parent
+	n.direction = n.parent.direction
 	if n.direction == "left" then
-		n.x = parent.x - 16 - 6
+		n.x = n.parent.x - 16 - 6
 	else
-		n.x = parent.x - 16 + 6
+		n.x = n.parent.x - 16 + 6
 	end
 	n.width = 48
-	n.height = 48
+	n.height = 27
 	n.die = 0
 
 	n.animations = {
@@ -30,13 +31,18 @@ function newSword(parent)
 end
 
 function sword:update(dt)
+
+	self.y = self.parent.y - 16 + 14
+	self.direction = self.parent.direction
+	if self.direction == "left" then
+		self.x = self.parent.x - 16 - 6
+	else
+		self.x = self.parent.x - 16 + 6
+	end
+
 	self.anim:update(dt)
 end
 
 function sword:draw()
-	self.anim:draw(self.x, self.y)
-end
-
-function sword:on_collide(e1, e2, dx, dy)
-
+	self.anim:draw(self.x, self.y - 14)
 end
