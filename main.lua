@@ -55,6 +55,7 @@ function lutro.load()
 	camera_y_offset = 0
 	gold = 0
 	hp = 3
+	screen_shake = 0
 
 	lutro.graphics.setBackgroundColor(0, 0, 0)
 
@@ -92,10 +93,16 @@ function lutro.update(dt)
 	JOY_B     = lutro.input.joypad("b")
 	JOY_Y     = lutro.input.joypad("y")
 
+	if screen_shake > 0 then
+		screen_shake = screen_shake - 1
+	end
+
 	if hp > 0 then
-		for i=1, #entities do
-			if entities[i] and entities[i].update then
-				entities[i]:update(dt)
+		if screen_shake == 0 then
+			for i=1, #entities do
+				if entities[i] and entities[i].update then
+					entities[i]:update(dt)
+				end
 			end
 		end
 	else
@@ -125,6 +132,15 @@ function lutro.update(dt)
 end
 
 function lutro.draw()
+
+	-- Shake camera if hit
+	local shake_x = 0
+	local shake_y = 0
+	if screen_shake > 0 then
+		shake_x = 5*(math.random()-0.5)
+		shake_y = 5*(math.random()-0.5)
+	end
+
 	lutro.graphics.clear()
 
 	for i=0, 4 do
@@ -135,7 +151,7 @@ function lutro.draw()
 
 	lutro.graphics.push()
 
-	lutro.graphics.translate(camera_x, camera_y)
+	lutro.graphics.translate(camera_x + shake_x, camera_y + shake_y)
 
 	tiled_draw_layer(map.layers[1])
 	tiled_draw_layer(map.layers[2])

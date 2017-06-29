@@ -112,7 +112,7 @@ function obake:on_collide(e1, e2, dx, dy)
 			self.die = 30
 		end
 
-	elseif e2.type == "sword" and e2.anim.id >= 3 and e2.anim.id <= 6 and self.hit == 0 and self.die == 0 then
+	elseif e2.type == "sword" and e2.anim.id >= 4 and e2.anim.id <= 5 and self.hit == 0 and self.die == 0 then
 		self.hit = 30
 		if e2.direction == "right" then
 			self.xspeed = 100
@@ -124,6 +124,7 @@ function obake:on_collide(e1, e2, dx, dy)
 
 		lutro.audio.play(sfx_enemyhit)
 		self.hp = self.hp - 1
+		screen_shake = 15
 
 		if self.hp <= 0 then
 			lutro.audio.play(sfx_enemydie)

@@ -23,10 +23,12 @@ function animation:update(dt)
 	if self.timer >= self.steps * self.period then
 		self.timer = 0
 	end
+
+	self.id = math.floor(self.timer / self.period + 1)
 end
 
 function animation:draw(x, y)
-	self.id = math.floor(self.timer / self.period + 1)
+	
 	local tw = self.width
 	local th = self.height
 	local sw = self.image:getWidth()

@@ -40,6 +40,10 @@ function sword:update(dt)
 		self.x = self.parent.x - 16 + 6
 	end
 
+	if self.parent.hit > 0 then
+		entities_remove(self)
+	end
+
 	self.anim:update(dt)
 end
 

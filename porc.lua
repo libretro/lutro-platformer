@@ -173,11 +173,13 @@ function porc:on_collide(e1, e2, dx, dy)
 	elseif e2.type == "shuriken" and self.hit == 0 and self.die == 0 then
 		entities_remove(e2)
 		self.hp = self.hp - 1
-		if self.hp <= 0 then 
+		if self.hp <= 0 then
+			lutro.audio.play(sfx_enemydie)
 			lutro.audio.play(sfx_porcdie)
 			self.die = 60
 			self.xspeed = 0
 		else
+			lutro.audio.play(sfx_enemyhit)
 			lutro.audio.play(sfx_porchit)
 			self.hit = 60
 			if dx > 0 then
@@ -186,13 +188,16 @@ function porc:on_collide(e1, e2, dx, dy)
 				self.xspeed = -2
 			end
 		end
-	elseif e2.type == "sword" and e2.anim.id >= 3 and e2.anim.id <= 6 and self.hit == 0 and self.die == 0 then
+	elseif e2.type == "sword" and e2.anim.id >= 4 and e2.anim.id <= 5 and self.hit == 0 and self.die == 0 then
 		self.hp = self.hp - 1
-		if self.hp <= 0 then 
+		screen_shake = 15
+		if self.hp <= 0 then
+			lutro.audio.play(sfx_enemydie)
 			lutro.audio.play(sfx_porcdie)
 			self.die = 60
 			self.xspeed = 0
 		else
+			lutro.audio.play(sfx_enemyhit)
 			lutro.audio.play(sfx_porchit)
 			self.hit = 60
 			if dx > 0 then
