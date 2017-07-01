@@ -113,6 +113,11 @@ function obake:on_collide(e1, e2, dx, dy)
 		end
 
 	elseif e2.type == "sword" and e2.anim.id >= 4 and e2.anim.id <= 5 and self.hit == 0 and self.die == 0 then
+		if dx ~= 0 then
+			self.xspeed = 0
+			self.x = self.x + dx
+		end
+		
 		self.hit = 30
 		if e2.direction == "right" then
 			self.xspeed = 100

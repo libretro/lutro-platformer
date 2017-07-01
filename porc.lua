@@ -189,6 +189,11 @@ function porc:on_collide(e1, e2, dx, dy)
 			end
 		end
 	elseif e2.type == "sword" and e2.anim.id >= 4 and e2.anim.id <= 5 and self.hit == 0 and self.die == 0 then
+		if dx ~= 0 then
+			self.xspeed = 0
+			self.x = self.x + dx
+		end
+
 		self.hp = self.hp - 1
 		screen_shake = 15
 		if self.hp <= 0 then
