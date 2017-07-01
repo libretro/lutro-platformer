@@ -153,7 +153,7 @@ function ninja:update(dt)
 	end
 
 	if self.DO_JUMP == 1 and JOY_DOWN
-	and not solid_at(self.x + 8, self.y + 32 + 3) then
+	and not solid_at(self.x + 8, self.y + self.height + 3) then
 		self.y = self.y + 3
 	elseif self.DO_JUMP == 1 and on_the_ground then
 		self.y = self.y - 1 - self.yoffset
