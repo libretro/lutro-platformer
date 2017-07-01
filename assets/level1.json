@@ -998,10 +998,10 @@
                  "id":126,
                  "name":"",
                  "rotation":0,
-                 "type":"porc",
+                 "type":"demon",
                  "visible":true,
                  "width":32,
-                 "x":2464,
+                 "x":2496,
                  "y":32
                 }, 
                 {
@@ -1582,6 +1582,17 @@
                  "width":240,
                  "x":3456,
                  "y":240
+                }, 
+                {
+                 "height":32,
+                 "id":180,
+                 "name":"",
+                 "rotation":0,
+                 "type":"demon",
+                 "visible":true,
+                 "width":32,
+                 "x":272,
+                 "y":160
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1589,7 +1600,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":180,
+ "nextobjectid":181,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.0.1",

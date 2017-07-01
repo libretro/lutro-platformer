@@ -315,7 +315,8 @@ function ninja:on_collide(e1, e2, dx, dy)
 
 		hp = 0
 
-	elseif (e2.type == "obake" or e2.type == "porc") and self.hit == 0 and e2.die == 0 then
+	elseif (e2.type == "obake" or e2.type == "porc" or e2.type == "demon")
+	and self.hit == 0 and e2.die == 0 then
 
 		lutro.audio.play(sfx_hit)
 		screen_shake = 15
@@ -329,5 +330,19 @@ function ninja:on_collide(e1, e2, dx, dy)
 		self.yspeed = -1
 		hp = hp - 1
 
+	elseif (e2.type == "fireball")
+	and self.hit == 0 and e2.die == 0 then
+
+		lutro.audio.play(sfx_hit)
+		screen_shake = 15
+		self.hit = 60
+		if dx > 0 then
+			self.xspeed = 200
+		else
+			self.xspeed = -200
+		end
+		self.y = self.y - 1
+		self.yspeed = -1
+		hp = hp - 1
 	end
 end

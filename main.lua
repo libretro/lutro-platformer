@@ -6,8 +6,10 @@ require "obake"
 require "coin"
 require "bigcoin"
 require "porc"
+require "demon"
 require "elevator"
 require "shuriken"
+require "fireball"
 require "sword"
 
 function lutro.conf(t)
@@ -32,6 +34,8 @@ local add_entity_from_map = function(object)
 		table.insert(entities, newBigcoin(object))
 	elseif object.type == "porc" then
 		table.insert(entities, newPorc(object))
+	elseif object.type == "demon" then
+		table.insert(entities, newDemon(object))
 	elseif object.type == "obake" then
 		table.insert(entities, newObake(object))
 	elseif object.type == "ninja" then
@@ -82,6 +86,9 @@ function lutro.load()
 	sfx_porchit = lutro.audio.newSource("assets/porchit.wav")
 	sfx_porcdie = lutro.audio.newSource("assets/porcdie.wav")
 	sfx_shurikencollide = lutro.audio.newSource("assets/shurikencollide.wav")
+	sfx_fireballspit = lutro.audio.newSource("assets/fireballspit.wav")
+	sfx_fireballcollide = lutro.audio.newSource("assets/fireballcollide.wav")
+	sfx_airgather = lutro.audio.newSource("assets/airgather.wav")
 end
 
 function lutro.update(dt)
@@ -98,13 +105,13 @@ function lutro.update(dt)
 	end
 
 	if hp > 0 then
-		if screen_shake == 0 then
+		--if screen_shake == 0 then
 			for i=1, #entities do
 				if entities[i] and entities[i].update then
 					entities[i]:update(dt)
 				end
 			end
-		end
+		--end
 	else
 		ninja:update(dt)
 	end
