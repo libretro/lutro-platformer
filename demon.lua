@@ -20,6 +20,7 @@ function newDemon(object)
 	n.GOLEFT = false
 	n.spit = 0
 	n.nospit = 0
+	n.t = 0
 
 	n.animations = {
 		run = {
@@ -50,6 +51,9 @@ function newDemon(object)
 
 	n.anim = n.animations[n.stance][n.direction]
 
+	n.dotanim = newAnimation(lutro.graphics.newImage(
+		"assets/dot.png"), 3, 3, 1, 30)
+
 	return setmetatable(n, demon)
 end
 
@@ -59,6 +63,8 @@ function demon:on_the_ground()
 end
 
 function demon:update(dt)
+	self.t = self.t + 1
+
 	if self.hit > 0 then
 		self.hit = self.hit - 1
 		self.spit = 0
@@ -157,10 +163,25 @@ function demon:update(dt)
 	self.anim = anim
 
 	self.anim:update(dt)
+	self.dotanim:update(dt)
 end
 
 function demon:draw()
 	self.anim:draw(self.x - 9, self.y)
+
+	local ox = 10
+	if self.direction == "left" then
+		ox = 0
+	end
+
+	if self.spit > 30 and self.spit < 60 then
+		for i=1,8 do
+			local r = math.max(0, self.spit*2 - 60)
+			local x = math.cos(self.t+i)*r
+			local y = math.sin(self.t+i)*r
+			self.dotanim:draw(self.x + ox + x, self.y + 12 + y)
+		end
+	end
 end
 
 function demon:on_collide(e1, e2, dx, dy)
