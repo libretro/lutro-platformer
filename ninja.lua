@@ -26,6 +26,7 @@ function newNinja(object)
 	n.dying = 0
 	n.throw = 0
 	n.sword = 0
+	n.yoffset = 0
 
 	n.animations = {
 		stand = {
@@ -90,8 +91,8 @@ function newNinja(object)
 end
 
 function ninja:on_the_ground()
-	return (solid_at(self.x + 1, self.y + 32, self)
-		or solid_at(self.x + 15, self.y + 32, self))
+	return (solid_at(self.x + 1, self.y + 32 - self.yoffset, self)
+		or solid_at(self.x + 15, self.y + 32 - self.yoffset, self))
 		and self.yspeed >= 0
 		and hp > 0
 end
@@ -155,7 +156,7 @@ function ninja:update(dt)
 	and not solid_at(self.x + 8, self.y + 32 + 3) then
 		self.y = self.y + 3
 	elseif self.DO_JUMP == 1 and on_the_ground then
-		self.y = self.y - 1
+		self.y = self.y - 1 - self.yoffset
 		self.yspeed = -210
 		lutro.audio.play(sfx_jump)
 	end
@@ -246,11 +247,9 @@ function ninja:update(dt)
 		end
 	end
 
-	if JOY_DOWN then
-		if on_the_ground then
-			self.xspeed = 0
-			self.stance = "duck"
-		end
+	if on_the_ground and JOY_DOWN then
+		self.xspeed = 0
+		self.stance = "duck"
 	end
 
 	if self.throw > 0 then
@@ -265,6 +264,17 @@ function ninja:update(dt)
 		self.stance = "hit"
 	end
 
+	if self.stance == "duck" then
+		if self.yoffset == 0 then
+			self.y = self.y + 16
+		end
+		self.yoffset = 16
+		self.height = 16
+	else
+		self.yoffset = 0
+		self.height = 32
+	end
+
 	local anim = self.animations[self.stance][self.direction]
 	-- always animate from first frame 
 	if anim ~= self.anim then
@@ -276,7 +286,7 @@ function ninja:update(dt)
 end
 
 function ninja:draw()
-	self.anim:draw(self.x - 16, self.y - 16)
+	self.anim:draw(self.x - 16, self.y - 16 - self.yoffset)
 end
 
 function ninja:on_collide(e1, e2, dx, dy)
