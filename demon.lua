@@ -104,7 +104,7 @@ function demon:update(dt)
 
 	-- spitting fire
 	if math.abs(self.x - ninja.x) < 128
-	and self.spit == 0 and self.nospit == 0 and self.hit == 0
+	and self.spit == 0 and self.nospit == 0 and self.hit == 0 and self.die == 0 and self.hp > 0
 	and ((self.direction == "left"  and ninja.x < self.x)
 	or   (self.direction == "right" and ninja.x > self.x))
 	then
@@ -156,7 +156,7 @@ function demon:update(dt)
 	end
 	self.anim = anim
 
-	self.anim:update(1/60)
+	self.anim:update(dt)
 end
 
 function demon:draw()
@@ -201,7 +201,7 @@ function demon:on_collide(e1, e2, dx, dy)
 			end
 		end
 	elseif e2.type == "sword" and e2.anim.id >= 4 and e2.anim.id <= 5 and self.hit == 0 and self.die == 0 then
-		self.hp = self.hp - 1
+		self.hp = self.hp - 2
 		screen_shake = 15
 		if self.hp <= 0 then
 			lutro.audio.play(sfx_enemydie)

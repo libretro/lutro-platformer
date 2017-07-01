@@ -79,9 +79,9 @@ function newNinja(object)
 		},
 		sword = {
 			left  = newAnimation(lutro.graphics.newImage(
-				"assets/ninja_sword_left.png"),  48, 48, 1, 15),
+				"assets/ninja_sword_left.png"),  48, 48, 1, 30),
 			right = newAnimation(lutro.graphics.newImage(
-				"assets/ninja_sword_right.png"), 48, 48, 1, 15)
+				"assets/ninja_sword_right.png"), 48, 48, 1, 30)
 		},
 	}
 
@@ -193,7 +193,7 @@ function ninja:update(dt)
 
 	if self.DO_SWORD == 1 and self.sword == 0 then
 		lutro.audio.play(sfx_throw)
-		self.sword = 30
+		self.sword = 15
 		sword = newSword(self)
 		table.insert(entities, sword)
 	end

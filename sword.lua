@@ -20,9 +20,9 @@ function newSword(parent)
 
 	n.animations = {
 		left  = newAnimation(lutro.graphics.newImage(
-			"assets/sword_left.png"),  48, 48, 1, 15),
+			"assets/sword_left.png"),  48, 48, 1, 30),
 		right = newAnimation(lutro.graphics.newImage(
-			"assets/sword_right.png"), 48, 48, 1, 15)
+			"assets/sword_right.png"), 48, 48, 1, 30)
 	}
 
 	n.anim = n.animations[n.direction]
