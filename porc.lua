@@ -16,7 +16,7 @@ function newPorc(object)
 	n.DO_JUMP = 0
 	n.hit = 0
 	n.die = 0
-	n.hp = 3
+	n.hp = 2
 	n.c = 0
 	n.GOLEFT = false
 	n.noisedelay = 100
@@ -54,8 +54,8 @@ function newPorc(object)
 end
 
 function porc:on_the_ground()
-	return solid_at(self.x + 5, self.y+26, self)
-		or solid_at(self.x + 27, self.y+26, self)
+	return solid_at(self.x + 1, self.y + self.height, self)
+		or solid_at(self.x + self.width - 1, self.y + self.height, self)
 end
 
 function porc:update(dt)
@@ -198,9 +198,10 @@ function porc:on_collide(e1, e2, dx, dy)
 			self.x = self.x + dx
 		end
 
-		self.hp = self.hp - 1
+		self.hp = self.hp - 2
 		screen_shake = 15
 		if self.hp <= 0 then
+			self.hp = 0
 			lutro.audio.play(sfx_enemydie)
 			lutro.audio.play(sfx_porcdie)
 			self.die = 60

@@ -16,7 +16,7 @@ function newObake(object)
 	n.t = 0
 	n.hit = 0
 	n.die = 0
-	n.hp = 3
+	n.hp = 2
 
 	n.animations = {
 		fly = {
@@ -117,7 +117,7 @@ function obake:on_collide(e1, e2, dx, dy)
 			self.xspeed = 0
 			self.x = self.x + dx
 		end
-		
+
 		self.hit = 30
 		if e2.direction == "right" then
 			self.xspeed = 100
@@ -128,10 +128,11 @@ function obake:on_collide(e1, e2, dx, dy)
 		end
 
 		lutro.audio.play(sfx_enemyhit)
-		self.hp = self.hp - 1
+		self.hp = self.hp - 2
 		screen_shake = 15
 
 		if self.hp <= 0 then
+			self.hp = 0
 			lutro.audio.play(sfx_enemydie)
 			self.die = 30
 		end

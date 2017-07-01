@@ -231,6 +231,7 @@ function demon:on_collide(e1, e2, dx, dy)
 		self.hp = self.hp - 2
 		screen_shake = 15
 		if self.hp <= 0 then
+			self.hp = 0
 			lutro.audio.play(sfx_enemydie)
 			--lutro.audio.play(sfx_demondie)
 			self.die = 60
