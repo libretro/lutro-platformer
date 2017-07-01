@@ -271,6 +271,9 @@ function ninja:update(dt)
 		self.yoffset = 16
 		self.height = 16
 	else
+		if self.yoffset == 16 then
+			self.y = self.y - 16
+		end
 		self.yoffset = 0
 		self.height = 32
 	end
