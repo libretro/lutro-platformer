@@ -6,7 +6,7 @@ shuriken.__index = shuriken
 function newShuriken()
 	local n = {}
 	n.type = "shuriken"
-	n.y = ninja.y + 10
+	n.y = ninja.y + 10 - ninja.yoffset/2
 	if ninja.direction == "right" then
 		n.speed = 6
 		n.x = ninja.x + 16
