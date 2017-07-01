@@ -198,13 +198,13 @@ function ninja:update(dt)
 	end
 
 	-- moving
-	if JOY_LEFT and self.hit == 0 and self.sword == 0 then
+	if JOY_LEFT and self.hit == 0 and self.sword == 0 and not JOY_DOWN then
 		self.xspeed = self.xspeed - self.xaccel * dt;
 		self.xspeed = math.max(self.xspeed, -self.max_xspeed)
 		self.direction = "left";
 	end
 
-	if JOY_RIGHT and self.hit == 0 and self.sword == 0 then
+	if JOY_RIGHT and self.hit == 0 and self.sword == 0 and not JOY_DOWN then
 		self.xspeed = self.xspeed + self.xaccel * dt;
 		self.xspeed = math.min(self.xspeed, self.max_xspeed)
 		self.direction = "right";
