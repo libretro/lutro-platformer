@@ -85,7 +85,7 @@ function porc:update(dt)
 
 	end
 
-	if self.hp == 3 then
+	if self.hp > 1 then
 		self.speed = 1
 	else
 		self.speed = 2
@@ -133,7 +133,7 @@ function porc:update(dt)
 		self.stance = "die"
 	elseif self.hit > 0 then
 		self.stance = "hit"
-	elseif self.hp < 3 then
+	elseif self.hp <= 1 then
 		self.stance = "angry"
 		self.noisedelay = 20
 	else
