@@ -60,7 +60,8 @@ end
 
 function porc:update(dt)
 	self.c = self.c + 1
-	if self.c % self.noisedelay == 0 and math.abs(self.x - ninja.x) < 160 then
+	if self.c % self.noisedelay == 0 and math.abs(self.x - ninja.x) < 160
+	and self.hit == 0 and self.die == 0 then
 		lutro.audio.play(sfx_porc)
 	end
 
