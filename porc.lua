@@ -19,6 +19,7 @@ function newPorc(object)
 	n.hp = 3
 	n.c = 0
 	n.GOLEFT = false
+	n.noisedelay = 100
 
 	n.animations = {
 		run = {
@@ -59,7 +60,7 @@ end
 
 function porc:update(dt)
 	self.c = self.c + 1
-	if self.c % 100 == 0 and math.abs(self.x - ninja.x) < 160 then
+	if self.c % self.noisedelay == 0 and math.abs(self.x - ninja.x) < 160 then
 		lutro.audio.play(sfx_porc)
 	end
 
@@ -133,8 +134,10 @@ function porc:update(dt)
 		self.stance = "hit"
 	elseif self.hp < 3 then
 		self.stance = "angry"
+		self.noisedelay = 20
 	else
 		self.stance = "run"
+		self.noisedelay = 100
 	end
 
 	local anim = self.animations[self.stance][self.direction]
