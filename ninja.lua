@@ -91,8 +91,8 @@ function newNinja(object)
 end
 
 function ninja:on_the_ground()
-	return (solid_at(self.x + 1, self.y + 32 - self.yoffset, self)
-		or solid_at(self.x + 15, self.y + 32 - self.yoffset, self))
+	return (solid_at(self.x + 1, self.y + self.height, self)
+		or solid_at(self.x + self.width - 1, self.y + self.height, self))
 		and self.yspeed >= 0
 		and hp > 0
 end

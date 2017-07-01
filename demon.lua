@@ -5,7 +5,7 @@ demon.__index = demon
 
 function newDemon(object)
 	local n = object
-	n.width = 22
+	n.width = 14
 	n.height = 32
 	n.speed = 1
 	n.xspeed = 0
@@ -54,8 +54,8 @@ function newDemon(object)
 end
 
 function demon:on_the_ground()
-	return solid_at(self.x + 5, self.y+32, self)
-		or solid_at(self.x + 27, self.y+32, self)
+	return solid_at(self.x + 1, self.y + self.height, self)
+		or solid_at(self.x + self.width - 1, self.y + self.height, self)
 end
 
 function demon:update(dt)
@@ -96,8 +96,8 @@ function demon:update(dt)
 		self.y = self.y + self.yspeed
 	end
 
-	if not solid_at(self.x             , self.y+32, self) and self.GOLEFT 
-	or not solid_at(self.x + self.width, self.y+32, self) and not self.GOLEFT 
+	if not solid_at(self.x             , self.y + self.height, self) and self.GOLEFT 
+	or not solid_at(self.x + self.width, self.y + self.height, self) and not self.GOLEFT 
 	then
 		self.GOLEFT = not self.GOLEFT
 	end
@@ -160,7 +160,7 @@ function demon:update(dt)
 end
 
 function demon:draw()
-	self.anim:draw(self.x - 5, self.y)
+	self.anim:draw(self.x - 9, self.y)
 end
 
 function demon:on_collide(e1, e2, dx, dy)
