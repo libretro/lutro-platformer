@@ -31,6 +31,7 @@ function newNinja(object)
 	n.dash = 0
 	-- n.x2 = 0
 	-- n.y2 = 0
+	n.grounded = false
 
 	n.animations = {
 		stand = {
@@ -103,7 +104,7 @@ end
 
 function ninja:update(dt)
 
-	local on_the_ground = self:on_the_ground()
+	self.grounded = self:on_the_ground()
 
 	if hp <= 0 then
 		self.dying = self.dying + 1
@@ -147,7 +148,7 @@ function ninja:update(dt)
 	end
 
 	-- gravity
-	if not on_the_ground then
+	if not self.grounded then
 		self.yspeed = self.yspeed + self.yaccel * dt
 		self.yspeed = math.min(self.yspeed, self.max_yspeed)
 		self.y = self.y + dt * self.yspeed
@@ -160,12 +161,12 @@ function ninja:update(dt)
 		self.DO_JUMP = 0
 	end
 
-	if self.DO_JUMP == 1 and JOY_DOWN
+	if self.DO_JUMP == 1 and JOY_DOWN and self.yspeed == 0
 	and not solid_at(self.x + 1, self.y + self.height + 3)
 	and not solid_at(self.x + self.width - 1, self.y + self.height + 3)
 	then
 		self.y = self.y + 3
-	elseif self.DO_JUMP == 1 and on_the_ground then
+	elseif self.DO_JUMP == 1 and self.grounded then
 		self.y = self.y - 1 - self.yoffset
 		self.yspeed = -210
 		lutro.audio.play(sfx_jump)
@@ -177,7 +178,7 @@ function ninja:update(dt)
 	end
 
 	-- additionnal frames of hang time at the top of a high jump
-	if not on_the_ground and self.DO_JUMP > 1 and math.abs(self.yspeed) <= 20 then
+	if not self.grounded and self.DO_JUMP > 1 and math.abs(self.yspeed) <= 20 then
 		self.y = self.y - dt * self.yspeed
 	end
 
@@ -243,7 +244,7 @@ function ninja:update(dt)
 	self.x = self.x + self.xspeed * dt;
 
 	-- decelerating
-	self.friction = on_the_ground and self.groundfriction or self.airfriction
+	self.friction = self.grounded and self.groundfriction or self.airfriction
 
 	if  not JOY_RIGHT and not JOY_LEFT
 	then
@@ -261,7 +262,7 @@ function ninja:update(dt)
 	end
 
 	-- animations
-	if on_the_ground then
+	if self.grounded then
 		if self.xspeed == 0 then
 			self.stance = "stand"
 		else
@@ -275,7 +276,7 @@ function ninja:update(dt)
 		end
 	end
 
-	if on_the_ground and JOY_DOWN then
+	if self.grounded and JOY_DOWN then
 		self.xspeed = 0
 		self.stance = "duck"
 	end
@@ -348,8 +349,8 @@ function ninja:on_collide(e1, e2, dx, dy)
 	elseif e2.type == "bridge" or e2.type == "elevator" then
 
 		if dy ~= 0 and self.yspeed > 0
-		and not JOY_DOWN
 		and self.y + self.height > e2.y
+		and self.grounded
 		then
 			self.yspeed = 0
 			self.y = self.y + dy
