@@ -162,10 +162,10 @@ function ninja:update(dt)
 	end
 
 	if self.DO_JUMP == 1 and JOY_DOWN and self.yspeed == 0
-	and not solid_at(self.x + 1, self.y + self.height + 3)
-	and not solid_at(self.x + self.width - 1, self.y + self.height + 3)
+	and not solid_at(self.x + 1, self.y + self.height + 10)
+	and not solid_at(self.x + self.width - 1, self.y + self.height + 10)
 	then
-		self.y = self.y + 3
+		self.y = self.y + 10
 	elseif self.DO_JUMP == 1 and self.grounded then
 		self.y = self.y - 1 - self.yoffset
 		self.yspeed = -210

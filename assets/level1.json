@@ -566,7 +566,7 @@
                  "y":64
                 }, 
                 {
-                 "height":2,
+                 "height":8,
                  "id":81,
                  "name":"",
                  "rotation":0,
@@ -577,7 +577,7 @@
                  "y":144
                 }, 
                 {
-                 "height":2,
+                 "height":8,
                  "id":84,
                  "name":"",
                  "rotation":0,
@@ -588,7 +588,7 @@
                  "y":96
                 }, 
                 {
-                 "height":2,
+                 "height":8,
                  "id":85,
                  "name":"",
                  "rotation":0,
@@ -599,7 +599,7 @@
                  "y":144
                 }, 
                 {
-                 "height":2,
+                 "height":8,
                  "id":86,
                  "name":"",
                  "rotation":0,
@@ -717,7 +717,7 @@
                  "y":64
                 }, 
                 {
-                 "height":2,
+                 "height":8,
                  "id":100,
                  "name":"",
                  "rotation":0,
@@ -1562,7 +1562,7 @@
                  "y":16
                 }, 
                 {
-                 "height":2,
+                 "height":8,
                  "id":178,
                  "name":"",
                  "rotation":0,
