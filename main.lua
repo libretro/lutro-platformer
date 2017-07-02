@@ -20,6 +20,10 @@ end
 local add_entity_from_map = function(object)
 	if object.type == "ground" then
 		table.insert(entities, object)
+	elseif object.type == "slopeleft" then
+		table.insert(entities, object)
+	elseif object.type == "sloperight" then
+		table.insert(entities, object)
 	elseif object.type == "bridge" then
 		table.insert(entities, object)
 	elseif object.type == "stopper" then
@@ -70,7 +74,7 @@ function lutro.load()
 	barfont = lutro.graphics.newImageFont("assets/barfont.png", "0123456789 xGHh")
 	lutro.graphics.setFont(barfont)
 
-	map = tiled_load("assets/level1.json")
+	map = tiled_load("assets/slopes.json")
 	tiled_load_objects(map, add_entity_from_map)
 
 	sfx_coin = lutro.audio.newSource("assets/coin.wav")

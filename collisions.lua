@@ -48,10 +48,22 @@ function solid_at(x, y, exclude)
 
 		if  x >= e.x and x < e.x + e.width
 		and y >= e.y and y < e.y + e.height
-		and (e.type == "ground" or e.type == "bridge" or e.type == "elevator")
+		and (e.type == "ground"
+		  or e.type == "bridge"
+		  or e.type == "elevator"
+		  or e.type == "slopeleft"
+		  or e.type == "sloperight")
 		and e ~= exclude
 		then
-			return e;
+			if e.type == "slopeleft" then
+				local slope_y = e.y + e.height -(x + 1 - e.x) / (e.width / e.height)
+				if y + 1 > slope_y then return e end
+			elseif e.type == "sloperight" then
+				local slope_y = e.y +((x - 1 - e.x) / (e.width / e.height))
+				if y + 1 > slope_y then return e end
+			else
+				return e;
+			end
 		end
 	end
 	return false;
