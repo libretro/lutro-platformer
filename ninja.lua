@@ -22,11 +22,15 @@ function newNinja(object)
 	n.DO_JUMP = 0
 	n.DO_THROW = 0
 	n.DO_SWORD = 0
+	n.DO_DASH = 0
 	n.hit = 0
 	n.dying = 0
 	n.throw = 0
 	n.sword = 0
 	n.yoffset = 0
+	n.dash = 0
+	-- n.x2 = 0
+	-- n.y2 = 0
 
 	n.animations = {
 		stand = {
@@ -138,6 +142,10 @@ function ninja:update(dt)
 		self.hit = self.hit - 1
 	end
 
+	if self.dash > 0 then
+		self.dash = self.dash - 1
+	end
+
 	-- gravity
 	if not on_the_ground then
 		self.yspeed = self.yspeed + self.yaccel * dt
@@ -153,7 +161,9 @@ function ninja:update(dt)
 	end
 
 	if self.DO_JUMP == 1 and JOY_DOWN
-	and not solid_at(self.x + 8, self.y + self.height + 3) then
+	and not solid_at(self.x + 1, self.y + self.height + 3)
+	and not solid_at(self.x + self.width - 1, self.y + self.height + 3)
+	then
 		self.y = self.y + 3
 	elseif self.DO_JUMP == 1 and on_the_ground then
 		self.y = self.y - 1 - self.yoffset
@@ -197,6 +207,24 @@ function ninja:update(dt)
 		sword = newSword(self)
 		table.insert(entities, sword)
 	end
+
+	if JOY_X and self.dash == 0 then
+		self.DO_DASH = self.DO_DASH + 1
+	else
+		self.DO_DASH = 0
+	end
+
+	-- if self.DO_DASH == 1 and self.dash == 0 then
+	-- 	self.x2 = self.x
+	-- 	self.y2 = self.y
+	-- 	lutro.audio.play(sfx_throw)
+	-- 	self.dash = 30
+	-- 	if self.direction == "right" then
+	-- 		self.xspeed = 400
+	-- 	else
+	-- 		self.xspeed = -400
+	-- 	end
+	-- end
 
 	-- moving
 	if JOY_LEFT and self.hit == 0 and self.sword == 0 and not JOY_DOWN then
@@ -290,6 +318,10 @@ end
 
 function ninja:draw()
 	self.anim:draw(self.x - 16, self.y - 16 - self.yoffset)
+
+	-- if self.dash > 0 then
+	-- 	self.anim:draw(self.x2 - 16, self.y2 - 16)
+	-- end
 end
 
 function ninja:on_collide(e1, e2, dx, dy)
@@ -315,7 +347,7 @@ function ninja:on_collide(e1, e2, dx, dy)
 
 	elseif e2.type == "bridge" or e2.type == "elevator" then
 
-		if math.abs(dy) < math.abs(dx) and dy ~= 0 and self.yspeed > 0
+		if dy ~= 0 and self.yspeed > 0
 		and not JOY_DOWN
 		and self.y + self.height > e2.y
 		then

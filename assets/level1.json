@@ -1593,6 +1593,17 @@
                  "width":32,
                  "x":272,
                  "y":160
+                }, 
+                {
+                 "height":32,
+                 "id":181,
+                 "name":"",
+                 "rotation":0,
+                 "type":"bigcoin",
+                 "visible":true,
+                 "width":32,
+                 "x":2408,
+                 "y":112
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1600,7 +1611,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":181,
+ "nextobjectid":182,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.0.1",

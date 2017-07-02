@@ -98,6 +98,7 @@ function lutro.update(dt)
 	JOY_DOWN  = lutro.input.joypad("down")
 	JOY_A     = lutro.input.joypad("a")
 	JOY_B     = lutro.input.joypad("b")
+	JOY_X     = lutro.input.joypad("x")
 	JOY_Y     = lutro.input.joypad("y")
 
 	if screen_shake > 0 then
