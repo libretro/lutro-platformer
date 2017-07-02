@@ -352,7 +352,13 @@ function ninja:on_collide(e1, e2, dx, dy)
 			lutro.audio.play(sfx_step)
 		end
 		self.yspeed = 0
-		self.y = e2.y - self.height + e2.height -((self.x + 16 - e2.x) / (e2.width / e2.height))
+		self.y = e2.y - self.height + e2.height -((self.x + self.width - e2.x) / (e2.width / e2.height))
+		if self.x + self.width >= e2.x + e2.width then
+			self.y = e2.y - self.height
+		end
+		if self.x + self.width < e2.x + 4 then
+			self.y = e2.y + e2.height - self.height
+		end
 
 	elseif e2.type == "sloperight" and self.DO_JUMP == 0 then
 
@@ -361,6 +367,12 @@ function ninja:on_collide(e1, e2, dx, dy)
 		end
 		self.yspeed = 0
 		self.y = e2.y - self.height +((self.x + 0 - e2.x) / (e2.width / e2.height))
+		if self.x <= e2.x then
+			self.y = e2.y - self.height
+		end
+		if self.x > e2.x + e2.width then
+			self.y = e2.y + e2.height - self.height
+		end
 
 	elseif e2.type == "bridge" or e2.type == "elevator" then
 
