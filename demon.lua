@@ -102,8 +102,8 @@ function demon:update(dt)
 		self.y = self.y + self.yspeed
 	end
 
-	if not solid_at(self.x             , self.y + self.height, self) and self.GOLEFT 
-	or not solid_at(self.x + self.width, self.y + self.height, self) and not self.GOLEFT 
+	if not solid_at(self.x             , self.y + self.height+14, self) and self.GOLEFT 
+	or not solid_at(self.x + self.width, self.y + self.height+14, self) and not self.GOLEFT 
 	then
 		self.GOLEFT = not self.GOLEFT
 	end
@@ -198,6 +198,26 @@ function demon:on_collide(e1, e2, dx, dy)
 			self.x = self.x + dx
 			self.GOLEFT = not self.GOLEFT
 		end
+	elseif e2.type == "slopeleft" and self.DO_JUMP == 0 then
+		self.yspeed = 0
+		self.y = e2.y - self.height + e2.height -((self.x + self.width - e2.x) / (e2.width / e2.height))
+		if self.x + self.width >= e2.x + e2.width then
+			self.y = e2.y - self.height
+		end
+		if self.x + self.width < e2.x + 4 then
+			self.y = e2.y + e2.height - self.height
+		end
+
+	elseif e2.type == "sloperight" and self.DO_JUMP == 0 then
+		self.yspeed = 0
+		self.y = e2.y - self.height +((self.x + 0 - e2.x) / (e2.width / e2.height))
+		if self.x <= e2.x then
+			self.y = e2.y - self.height
+		end
+		if self.x > e2.x + e2.width then
+			self.y = e2.y + e2.height - self.height
+		end
+
 	elseif e2.type == "ninja" then
 		if math.abs(dx) < math.abs(dy) and dx ~= 0 then
 			self.xspeed = 0
