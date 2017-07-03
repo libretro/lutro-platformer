@@ -46,7 +46,9 @@ function shuriken:draw()
 end
 
 function shuriken:on_collide(e1, e2, dx, dy)
-	if e2.type == "ground" and self.die == 0 then
+	if (e2.type == "ground"
+	 or e2.type == "slopeleft"
+	 or e2.type == "sloperight") and self.die == 0 then
 		self.speed = 0
 		self.anim.speed = 0
 		self.die = 30
