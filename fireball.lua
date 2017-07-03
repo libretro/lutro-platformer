@@ -39,7 +39,9 @@ function fireball:draw()
 end
 
 function fireball:on_collide(e1, e2, dx, dy)
-	if e2.type == "ground" then
+	if (e2.type == "ground"
+	 or e2.type == "slopeleft"
+	 or e2.type == "sloperight") then
 		entities_remove(self)
 		lutro.audio.play(sfx_fireballcollide)
 	elseif e2.type == "ninja" then
