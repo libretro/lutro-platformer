@@ -15,6 +15,10 @@ require "sword"
 function lutro.conf(t)
 	t.width  = SCREEN_WIDTH
 	t.height = SCREEN_HEIGHT
+	if (love ~= nil) then
+		t.window.width = SCREEN_WIDTH
+		t.window.height = SCREEN_HEIGHT
+	end
 end
 
 local add_entity_from_map = function(object)
@@ -97,13 +101,23 @@ end
 
 function lutro.update(dt)
 
-	JOY_LEFT  = lutro.input.joypad("left")
-	JOY_RIGHT = lutro.input.joypad("right")
-	JOY_DOWN  = lutro.input.joypad("down")
-	JOY_A     = lutro.input.joypad("a")
-	JOY_B     = lutro.input.joypad("b")
-	JOY_X     = lutro.input.joypad("x")
-	JOY_Y     = lutro.input.joypad("y")
+	if (love ~= nil) then
+		JOY_LEFT  = lutro.keyboard.isDown("left")
+		JOY_RIGHT = lutro.keyboard.isDown("right")
+		JOY_DOWN  = lutro.keyboard.isDown("down")
+		JOY_A     = lutro.keyboard.isDown("x")
+		JOY_B     = lutro.keyboard.isDown("z")
+		JOY_X     = lutro.keyboard.isDown("s")
+		JOY_Y     = lutro.keyboard.isDown("a")
+	else
+		JOY_LEFT  = lutro.input.joypad("left")
+		JOY_RIGHT = lutro.input.joypad("right")
+		JOY_DOWN  = lutro.input.joypad("down")
+		JOY_A     = lutro.input.joypad("a")
+		JOY_B     = lutro.input.joypad("b")
+		JOY_X     = lutro.input.joypad("x")
+		JOY_Y     = lutro.input.joypad("y")
+	end
 
 	if screen_shake > 0 then
 		screen_shake = screen_shake - 1
@@ -144,6 +158,9 @@ function lutro.update(dt)
 end
 
 function lutro.draw()
+	if (love ~= nil) then
+		love.graphics.scale(2.5)
+	end
 
 	-- Shake camera if hit
 	local shake_x = 0
