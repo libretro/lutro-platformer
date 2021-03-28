@@ -15,7 +15,7 @@ require "sword"
 function lutro.conf(t)
 	t.width  = SCREEN_WIDTH
 	t.height = SCREEN_HEIGHT
-	if (love ~= nil) then
+	if (t.window) then
 		t.window.width = SCREEN_WIDTH
 		t.window.height = SCREEN_HEIGHT
 	end
