@@ -15,10 +15,6 @@ require "sword"
 function lutro.conf(t)
 	t.width  = SCREEN_WIDTH
 	t.height = SCREEN_HEIGHT
-	if (love ~= nil) then
-		t.window.width = SCREEN_WIDTH
-		t.window.height = SCREEN_HEIGHT
-	end
 end
 
 local add_entity_from_map = function(object)
@@ -81,43 +77,49 @@ function lutro.load()
 	map = tiled_load("assets/slopes.json")
 	tiled_load_objects(map, add_entity_from_map)
 
-	sfx_coin = lutro.audio.newSource("assets/coin.wav")
-	sfx_jump = lutro.audio.newSource("assets/jump.wav")
-	sfx_step = lutro.audio.newSource("assets/step.wav")
-	sfx_hit = lutro.audio.newSource("assets/hit.wav")
-	sfx_porc = lutro.audio.newSource("assets/porc.wav")
-	sfx_dead = lutro.audio.newSource("assets/dead.wav")
-	sfx_throw = lutro.audio.newSource("assets/throw.wav")
-	sfx_gameover = lutro.audio.newSource("assets/gameover.wav")
-	sfx_enemyhit = lutro.audio.newSource("assets/enemyhit.wav")
-	sfx_enemydie = lutro.audio.newSource("assets/enemydie.wav")
-	sfx_porchit = lutro.audio.newSource("assets/porchit.wav")
-	sfx_porcdie = lutro.audio.newSource("assets/porcdie.wav")
-	sfx_shurikencollide = lutro.audio.newSource("assets/shurikencollide.wav")
-	sfx_fireballspit = lutro.audio.newSource("assets/fireballspit.wav")
-	sfx_fireballcollide = lutro.audio.newSource("assets/fireballcollide.wav")
-	sfx_airgather = lutro.audio.newSource("assets/airgather.wav")
+	sfx_coin = lutro.audio.newSource("assets/coin.wav", "static")
+	sfx_jump = lutro.audio.newSource("assets/jump.wav", "static")
+	sfx_step = lutro.audio.newSource("assets/step.wav", "static")
+	sfx_hit = lutro.audio.newSource("assets/hit.wav", "static")
+	sfx_porc = lutro.audio.newSource("assets/porc.wav", "static")
+	sfx_dead = lutro.audio.newSource("assets/dead.wav", "static")
+	sfx_throw = lutro.audio.newSource("assets/throw.wav", "static")
+	sfx_gameover = lutro.audio.newSource("assets/gameover.wav", "static")
+	sfx_enemyhit = lutro.audio.newSource("assets/enemyhit.wav", "static")
+	sfx_enemydie = lutro.audio.newSource("assets/enemydie.wav", "static")
+	sfx_porchit = lutro.audio.newSource("assets/porchit.wav", "static")
+	sfx_porcdie = lutro.audio.newSource("assets/porcdie.wav", "static")
+	sfx_shurikencollide = lutro.audio.newSource("assets/shurikencollide.wav", "static")
+	sfx_fireballspit = lutro.audio.newSource("assets/fireballspit.wav", "static")
+	sfx_fireballcollide = lutro.audio.newSource("assets/fireballcollide.wav", "static")
+	sfx_airgather = lutro.audio.newSource("assets/airgather.wav", "static")
 end
 
-function lutro.update(dt)
+RETRO_DEVICE_ID_JOYPAD_B        = 1
+RETRO_DEVICE_ID_JOYPAD_Y        = 2
+RETRO_DEVICE_ID_JOYPAD_SELECT   = 3
+RETRO_DEVICE_ID_JOYPAD_START    = 4
+RETRO_DEVICE_ID_JOYPAD_UP       = 5
+RETRO_DEVICE_ID_JOYPAD_DOWN     = 6
+RETRO_DEVICE_ID_JOYPAD_LEFT     = 7
+RETRO_DEVICE_ID_JOYPAD_RIGHT    = 8
+RETRO_DEVICE_ID_JOYPAD_A        = 9
+RETRO_DEVICE_ID_JOYPAD_X        = 10
+RETRO_DEVICE_ID_JOYPAD_L        = 11
+RETRO_DEVICE_ID_JOYPAD_R        = 12
+RETRO_DEVICE_ID_JOYPAD_L2       = 13
+RETRO_DEVICE_ID_JOYPAD_R2       = 14
+RETRO_DEVICE_ID_JOYPAD_L3       = 15
+RETRO_DEVICE_ID_JOYPAD_R3       = 16
 
-	if (love ~= nil) then
-		JOY_LEFT  = lutro.keyboard.isDown("left")
-		JOY_RIGHT = lutro.keyboard.isDown("right")
-		JOY_DOWN  = lutro.keyboard.isDown("down")
-		JOY_A     = lutro.keyboard.isDown("x")
-		JOY_B     = lutro.keyboard.isDown("z")
-		JOY_X     = lutro.keyboard.isDown("s")
-		JOY_Y     = lutro.keyboard.isDown("a")
-	else
-		JOY_LEFT  = lutro.input.joypad("left")
-		JOY_RIGHT = lutro.input.joypad("right")
-		JOY_DOWN  = lutro.input.joypad("down")
-		JOY_A     = lutro.input.joypad("a")
-		JOY_B     = lutro.input.joypad("b")
-		JOY_X     = lutro.input.joypad("x")
-		JOY_Y     = lutro.input.joypad("y")
-	end
+function lutro.update(dt)
+	JOY_LEFT  = lutro.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_LEFT)
+	JOY_RIGHT = lutro.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_RIGHT)
+	JOY_DOWN  = lutro.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_DOWN)
+	JOY_A     = lutro.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_A)
+	JOY_B     = lutro.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_B)
+	JOY_X     = lutro.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_X)
+	JOY_Y     = lutro.joystick.isDown(1, RETRO_DEVICE_ID_JOYPAD_Y)
 
 	if screen_shake > 0 then
 		screen_shake = screen_shake - 1
@@ -158,10 +160,6 @@ function lutro.update(dt)
 end
 
 function lutro.draw()
-	if (love ~= nil) then
-		love.graphics.scale(2.5)
-	end
-
 	-- Shake camera if hit
 	local shake_x = 0
 	local shake_y = 0
